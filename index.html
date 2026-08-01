@@ -60,7 +60,7 @@
             --fs-lg:   1.0625rem;
             --fs-xl:   1.1875rem;
             --fs-2xl:  clamp(1.25rem, 0.9rem + 1.2vw, 1.5rem);
-            --fs-3xl:  clamp(1.5rem, 1.05rem + 2vw, 2rem);
+            --fs-3xl:  clamp(1.75rem, 1.2rem + 2.4vw, 2.5rem);
 
             /* Radios */
             --r-sm: 6px;  --r-md: 10px;  --r-lg: 14px;  --r-full: 999px;
@@ -243,16 +243,16 @@
         }
 
         .section {
-            padding-top: var(--space-5);
-            scroll-margin-top: calc(var(--nav-h) + var(--space-4));
+            padding-top: var(--space-8);
+            scroll-margin-top: calc(var(--nav-h) + var(--space-5));
         }
 
         .section-head {
             display: flex;
             align-items: baseline;
             gap: var(--space-3);
-            margin-bottom: var(--space-3);
-            padding-bottom: var(--space-2);
+            margin-bottom: var(--space-5);
+            padding-bottom: var(--space-3);
             border-bottom: 1px solid var(--border);
         }
 
@@ -280,7 +280,7 @@
            HERO
            ============================================================ */
         .hero {
-            margin-top: var(--space-2);
+            margin-top: var(--space-6);
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--r-lg);
@@ -299,7 +299,7 @@
             display: flex;
             align-items: center;
             gap: var(--space-2);
-            height: 24px;
+            height: 34px;
             padding: 0 var(--space-4);
             background: var(--surface-3);
             border-bottom: 1px solid var(--border);
@@ -315,20 +315,18 @@
             margin-left: var(--space-2);
         }
 
-        /* Banda compacta: foto | datos | métricas, todo en una sola fila
-           para que las tarjetas de proyecto entren sobre el pliegue. */
         .hero-body {
             display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: var(--space-4) var(--space-5);
+            grid-template-columns: auto 1fr;
+            gap: var(--space-5) var(--space-6);
             align-items: center;
-            padding: var(--space-3) var(--space-5);
+            padding: var(--space-6) var(--space-5);
         }
 
         .avatar {
             position: relative;
-            width: 96px;
-            height: 96px;
+            width: 132px;
+            height: 132px;
             border-radius: 50%;
             border: 3px solid var(--accent);
             padding: 3px;
@@ -359,24 +357,18 @@
         .hero-text h1 {
             font-size: var(--fs-3xl);
             font-weight: 700;
-            line-height: 1.1;
+            line-height: 1.15;
             letter-spacing: -0.03em;
             color: var(--text);
+            margin-bottom: var(--space-2);
         }
 
         .hero-role {
-            font-size: var(--fs-base);
+            font-size: var(--fs-lg);
             color: var(--text-2);
-            margin-bottom: var(--space-3);
+            margin-bottom: var(--space-4);
         }
         .hero-role strong { color: var(--accent); font-weight: 600; }
-
-        .hero-pitch {
-            font-size: var(--fs-sm);
-            color: var(--text-3);
-            margin-top: var(--space-3);
-            max-width: 72ch;
-        }
 
         .cursor {
             display: inline-block;
@@ -399,8 +391,8 @@
             display: inline-flex;
             align-items: center;
             gap: var(--space-2);
-            min-height: 36px;
-            padding: 0 var(--space-3);
+            min-height: 44px;
+            padding: 0 var(--space-4);
             background: var(--surface-3);
             border: 1px solid var(--border);
             border-radius: var(--r-full);
@@ -416,44 +408,37 @@
         }
         .chip .icon { color: var(--accent); }
 
-        /* Métricas en columna a la derecha del hero (no en una fila propia,
-           que costaba ~90px de altura sobre el pliegue). */
         .stats {
+            grid-column: 1 / -1;
             display: grid;
-            gap: var(--space-2);
-            padding-left: var(--space-5);
-            border-left: 1px solid var(--border);
-            align-self: stretch;
-            align-content: center;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-3);
+            padding-top: var(--space-5);
+            border-top: 1px solid var(--border);
         }
         /* Grid con áreas: permite el orden válido <dt>→<dd> en el HTML y
            muestra el número arriba, alineado entre columnas aunque las
            etiquetas ocupen distinta cantidad de líneas. */
-        /* Grid con áreas: permite el orden válido <dt>→<dd> en el HTML
-           mostrando el número antes que su etiqueta. */
         .stat {
             display: grid;
-            grid-template-columns: auto 1fr;
-            grid-template-areas: "value label";
-            align-items: baseline;
-            gap: var(--space-2);
-            white-space: nowrap;
+            grid-template-areas: "value" "label";
+            align-content: start;
+            text-align: center;
         }
+        .stat-value { grid-area: value; }
+        .stat-label { grid-area: label; }
         .stat-value {
-            grid-area: value;
-            font-size: var(--fs-xl);
+            display: block;
+            font-size: var(--fs-2xl);
             font-weight: 700;
             color: var(--accent);
             line-height: 1.2;
         }
         .stat-label {
-            grid-area: label;
             font-size: var(--fs-xs);
             color: var(--text-3);
             text-transform: uppercase;
-            letter-spacing: 0.06em;
-            line-height: 1.3;
-            white-space: normal;
+            letter-spacing: 0.08em;
         }
 
         /* ============================================================
@@ -475,26 +460,19 @@
         /* ============================================================
            FILTRO DE PROYECTOS
            ============================================================ */
-        /* Los filtros comparten fila con el título de la sección: recupera
-           ~60px de altura sobre el pliegue frente a ponerlos en su propia fila. */
-        .section-head-filters {
-            flex-wrap: wrap;
-            align-items: center;
-            gap: var(--space-3);
-        }
-
         .filters {
             display: flex;
             flex-wrap: wrap;
             gap: var(--space-2);
+            margin-bottom: var(--space-5);
         }
 
         .filter-btn {
             display: inline-flex;
             align-items: center;
             gap: var(--space-2);
-            min-height: 36px;
-            padding: 0 var(--space-3);
+            min-height: 44px;
+            padding: 0 var(--space-4);
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--r-full);
@@ -529,8 +507,8 @@
         .card {
             display: flex;
             flex-direction: column;
-            gap: var(--space-2);
-            padding: var(--space-4);
+            gap: var(--space-3);
+            padding: var(--space-5);
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--r-md);
@@ -547,27 +525,17 @@
         }
         .card.is-hidden { display: none; }
 
-        /* Icono en línea con el título en lugar de apilado encima:
-           ahorra ~56px de alto por tarjeta. */
-        .card-head {
-            display: flex;
-            align-items: center;
-            gap: var(--space-3);
-        }
-
         .card-icon {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
-            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
             border-radius: var(--r-sm);
             background: var(--surface-3);
             border: 1px solid var(--border);
             color: var(--accent);
         }
-        .card-icon .icon { width: var(--icon-sm); height: var(--icon-sm); }
 
         .card h3 {
             font-size: var(--fs-base);
@@ -613,7 +581,7 @@
             display: inline-flex;
             align-items: center;
             gap: var(--space-2);
-            min-height: 32px;
+            min-height: 44px;
             margin-top: auto;
             color: var(--accent);
             font-family: 'JetBrains Mono', monospace;
@@ -826,77 +794,22 @@
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--r-full); }
         ::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
 
-        /* El mínimo de 44px es un requisito de objetivo TÁCTIL. Con mouse se
-           usan controles más compactos (36px) para ganar altura sobre el
-           pliegue; en cualquier dispositivo táctil vuelven a 44px. */
-        @media (pointer: coarse) {
-            .chip, .filter-btn, .card-link, .nav-link, .nav-print, .nav-brand, .btn {
-                min-height: 44px;
-            }
-        }
-
         /* ============================================================
            RESPONSIVE — mobile first breakpoints: 375 / 768 / 1024
            ============================================================ */
-        /* Por debajo de 1024px las métricas ya no caben en una tercera columna:
-           pasan a una fila horizontal bajo los datos de contacto. */
-        @media (max-width: 1023px) {
-            .hero-body { grid-template-columns: auto 1fr; }
-            .stats {
-                grid-column: 1 / -1;
-                grid-auto-flow: column;
-                justify-content: start;
-                gap: var(--space-5);
-                padding: var(--space-3) 0 0;
-                border-left: none;
-                border-top: 1px solid var(--border);
-            }
-        }
-
         @media (max-width: 767px) {
             .hero-body {
                 grid-template-columns: 1fr;
                 justify-items: center;
                 text-align: center;
-                padding: var(--space-4);
+                padding: var(--space-5) var(--space-4);
             }
-            .avatar { width: 72px; height: 72px; }
+            .avatar { width: 108px; height: 108px; }
             .hero-links { justify-content: center; }
-            .hero-pitch { text-align: center; margin-top: var(--space-2); }
-            /* Métricas en 3 columnas (valor sobre etiqueta) en vez de 3 filas
-               apiladas: ahorra ~45px de la primera pantalla en el teléfono. */
-            .stats {
-                grid-auto-flow: column;
-                grid-auto-columns: 1fr;
-                gap: var(--space-2);
-                width: 100%;
-            }
-            .stat {
-                grid-template-columns: 1fr;
-                grid-template-areas: "value" "label";
-                justify-items: center;
-                text-align: center;
-                gap: 0;
-            }
-            .section { padding-top: var(--space-4); }
-            .hero { margin-top: var(--space-1); }
+            .stats { gap: var(--space-2); }
+            .stat-value { font-size: var(--fs-xl); }
+            .section { padding-top: var(--space-7); }
             .cards { grid-template-columns: 1fr; }
-
-            /* En el teléfono los filtros envolvían en 3 filas (~120px). Como
-               tira deslizable ocupan una sola y siguen siendo alcanzables. */
-            .section-head-filters { flex-wrap: nowrap; align-items: center; }
-            .section-head-filters .section-count { display: none; }
-            .filters {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                scrollbar-width: none;
-                scroll-snap-type: x proximity;
-                -webkit-overflow-scrolling: touch;
-                margin-right: calc(var(--space-4) * -1);
-                padding-right: var(--space-4);
-            }
-            .filters::-webkit-scrollbar { display: none; }
-            .filter-btn { flex-shrink: 0; scroll-snap-align: start; }
         }
 
         @media (min-width: 640px) {
@@ -1098,12 +1011,9 @@
                             </a>
                             <span class="chip">
                                 <svg class="icon icon-sm" aria-hidden="true"><use href="#i-pin"/></svg>
-                                Mendoza, Argentina
+                                Godoy Cruz, Mendoza, Argentina
                             </span>
                         </div>
-                        <p class="hero-pitch">
-                            Simulación de dinámica molecular, machine learning y desarrollo full stack.
-                        </p>
                     </div>
 
                     <dl class="stats">
@@ -1122,250 +1032,6 @@
                     </dl>
                 </div>
             </header>
-
-
-            <!-- ===================== PROYECTOS ===================== -->
-            <section class="section" id="proyectos" aria-labelledby="h-proyectos">
-                <div class="section-head section-head-filters">
-                    <h2 id="h-proyectos">Proyectos</h2>
-                    <div class="filters" role="group" aria-label="Filtrar proyectos por categoría">
-                    <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">
-                        Todos <span class="count">16</span>
-                    </button>
-                    <button class="filter-btn" type="button" data-filter="investigacion" aria-pressed="false">
-                        Investigación <span class="count">6</span>
-                    </button>
-                    <button class="filter-btn" type="button" data-filter="papers" aria-pressed="false">
-                        Papers y docs <span class="count">4</span>
-                    </button>
-                    <button class="filter-btn" type="button" data-filter="comunidad" aria-pressed="false">
-                        Comunidad <span class="count">3</span>
-                    </button>
-                    <button class="filter-btn" type="button" data-filter="otros" aria-pressed="false">
-                        Otros <span class="count">3</span>
-                    </button>
-                    </div>
-                    <span class="section-count" data-visible-count>16 publicados</span>
-                </div>
-
-                <div class="cards" id="grid-proyectos">
-
-                    <!-- Investigación y simulación -->
-                    <article class="card reveal" data-cat="investigacion">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg></span>
-                            <h3>Laboratorio de Dinámica Molecular</h3>
-                        </div>
-                        <p>
-                            Universidad de Mendoza. Spring Boot + PostgreSQL con DeepSeek
-                            Coder V2-16B. Demo: <code>admin@demo.com</code> / <code>admin123</code>.
-                        </p>
-                        <ul class="tags">
-                            <li class="tag">Spring Boot</li>
-                            <li class="tag">PostgreSQL</li>
-                            <li class="tag">LLM</li>
-                        </ul>
-                        <a class="card-link" href="https://simaf-lab.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: Laboratorio de Dinámica Molecular</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <article class="card reveal" data-cat="investigacion">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-microscope"/></svg></span>
-                            <h3>Vacancy Finder Script</h3>
-                        </div>
-                        <p>
-                            Postprocesado de simulaciones con machine learning. Publicado
-                            como paquete en PyPI.
-                        </p>
-                        <ul class="tags">
-                            <li class="tag">Python</li>
-                            <li class="tag">Machine Learning</li>
-                            <li class="tag">PyPI</li>
-                        </ul>
-                        <a class="card-link" href="https://pypi.org/project/vacancycalculator/" target="_blank" rel="noopener noreferrer">
-                            Ver paquete<span class="sr-only">: Vacancy Finder Script en PyPI</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <article class="card reveal" data-cat="investigacion">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-atom"/></svg></span>
-                            <h3>Neutron Damage Analysis Dashboard</h3>
-                        </div>
-                        <p>Dashboard de análisis de daño por neutrones en materiales.</p>
-                        <a class="card-link" href="https://astonishing-marigold-55e3c9.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: Neutron Damage Analysis Dashboard</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <article class="card reveal" data-cat="investigacion">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-radiation"/></svg></span>
-                            <h3>Primary Radiation Damage</h3>
-                        </div>
-                        <p>Análisis de daño primario por radiación en materiales nucleares.</p>
-                        <a class="card-link" href="https://primary-radiation-damage.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: Primary Radiation Damage</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <article class="card reveal" data-cat="investigacion">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-cpu"/></svg></span>
-                            <h3>Memristors Summary</h3>
-                        </div>
-                        <p>Resumen y síntesis de investigación sobre memristores.</p>
-                        <a class="card-link" href="https://memristors-summary.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: Memristors Summary</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <article class="card reveal" data-cat="investigacion">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg></span>
-                            <h3>Results 2026</h3>
-                        </div>
-                        <p>Panel de resultados y visualización de datos experimentales.</p>
-                        <a class="card-link" href="https://results-2026.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: Results 2026</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <!-- Papers y documentación -->
-                    <article class="card reveal" data-cat="papers">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg></span>
-                            <h3>I Love Papers</h3>
-                        </div>
-                        <p>Buscador y visor de artículos científicos.</p>
-                        <a class="card-link" href="https://ilovepapers.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: I Love Papers</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <article class="card reveal" data-cat="papers">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-library"/></svg></span>
-                            <h3>Papers Hub</h3>
-                        </div>
-                        <p>Repositorio web para organizar y consultar papers.</p>
-                        <a class="card-link" href="https://pappers-hub.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: Papers Hub</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <article class="card reveal" data-cat="papers">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
-                            <h3>LAMMPS Guide</h3>
-                        </div>
-                        <p>Manual de referencia de LAMMPS para dinámica molecular.</p>
-                        <a class="card-link" href="https://lammps-guide.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: LAMMPS Guide</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <article class="card reveal" data-cat="papers">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-orbit"/></svg></span>
-                            <h3>Física Cosmológica Avanzada</h3>
-                        </div>
-                        <p>Material y apuntes de física cosmológica avanzada.</p>
-                        <a class="card-link" href="https://fisics.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: Física Cosmológica Avanzada</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <!-- Comunidad -->
-                    <article class="card reveal" data-cat="comunidad">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></span>
-                            <h3>Grupo Joven INSL</h3>
-                        </div>
-                        <p>Web para el grupo de jóvenes de la Iglesia Nuestra Señora del Líbano.</p>
-                        <a class="card-link" href="https://nsl-grupojoven.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: Grupo Joven INSL</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <article class="card reveal" data-cat="comunidad">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg></span>
-                            <h3>Camino Luz Vida</h3>
-                        </div>
-                        <p>Sitio web de contenido pastoral y comunitario.</p>
-                        <a class="card-link" href="https://camino-luz-vida.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: Camino Luz Vida</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <article class="card reveal" data-cat="comunidad">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-church"/></svg></span>
-                            <h3>Retiro Parroquia NSDL</h3>
-                        </div>
-                        <p>Sitio del retiro de jóvenes de la parroquia Nuestra Señora de Luján.</p>
-                        <a class="card-link" href="https://retiro-parroquia-nsdl.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: Retiro Parroquia NSDL</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <!-- Otros -->
-                    <article class="card reveal" data-cat="otros">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg></span>
-                            <h3>Mis Links SBS</h3>
-                        </div>
-                        <p>Hub personal que centraliza todos mis enlaces y proyectos publicados.</p>
-                        <a class="card-link" href="https://mislinks-sbs.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: Mis Links SBS</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <article class="card reveal" data-cat="otros">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-palette"/></svg></span>
-                            <h3>Rahip Estudio</h3>
-                        </div>
-                        <p>Sitio del estudio de diseño Rahip.</p>
-                        <a class="card-link" href="https://rahip-estudio.netlify.app/" target="_blank" rel="noopener noreferrer">
-                            Ver aplicación<span class="sr-only">: Rahip Estudio</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-
-                    <article class="card reveal" data-cat="otros">
-                        <div class="card-head">
-                            <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg></span>
-                            <h3>Repositorios en GitHub</h3>
-                        </div>
-                        <p>Más de 50 repositorios de código abierto: simulación, análisis de datos y web.</p>
-                        <a class="card-link" href="https://github.com/TiagoBe0" target="_blank" rel="noopener noreferrer">
-                            Ver GitHub<span class="sr-only">: perfil de Santiago Bergamin</span>
-                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
-                        </a>
-                    </article>
-                </div>
-
-                <p class="empty-state" data-empty hidden>// sin proyectos en esta categoría</p>
-                <p class="sr-only" role="status" aria-live="polite" data-live></p>
-            </section>
 
             <!-- ===================== SOBRE MÍ ===================== -->
             <section class="section" id="sobre-mi" aria-labelledby="h-sobre-mi">
@@ -1387,6 +1053,218 @@
                         web, que es donde aprendí a explicar sistemas complejos de forma simple.
                     </p>
                 </div>
+            </section>
+
+            <!-- ===================== PROYECTOS ===================== -->
+            <section class="section" id="proyectos" aria-labelledby="h-proyectos">
+                <div class="section-head">
+                    <h2 id="h-proyectos">Proyectos</h2>
+                    <span class="section-count" data-visible-count>16 publicados</span>
+                </div>
+
+                <div class="filters" role="group" aria-label="Filtrar proyectos por categoría">
+                    <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">
+                        Todos <span class="count">16</span>
+                    </button>
+                    <button class="filter-btn" type="button" data-filter="investigacion" aria-pressed="false">
+                        Investigación <span class="count">6</span>
+                    </button>
+                    <button class="filter-btn" type="button" data-filter="papers" aria-pressed="false">
+                        Papers y docs <span class="count">4</span>
+                    </button>
+                    <button class="filter-btn" type="button" data-filter="comunidad" aria-pressed="false">
+                        Comunidad <span class="count">3</span>
+                    </button>
+                    <button class="filter-btn" type="button" data-filter="otros" aria-pressed="false">
+                        Otros <span class="count">3</span>
+                    </button>
+                </div>
+
+                <div class="cards" id="grid-proyectos">
+
+                    <!-- Investigación y simulación -->
+                    <article class="card reveal" data-cat="investigacion">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg></span>
+                        <h3>Laboratorio de Dinámica Molecular — Universidad de Mendoza</h3>
+                        <p>
+                            Aplicación web full stack con Spring Boot, PostgreSQL y frontend moderno,
+                            integrada con DeepSeek Coder V2-16B y Claude. Demo: <code>admin@demo.com</code> / <code>admin123</code>.
+                        </p>
+                        <ul class="tags">
+                            <li class="tag">Spring Boot</li>
+                            <li class="tag">PostgreSQL</li>
+                            <li class="tag">LLM</li>
+                        </ul>
+                        <a class="card-link" href="https://simaf-lab.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Laboratorio de Dinámica Molecular</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="investigacion">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-microscope"/></svg></span>
+                        <h3>Vacancy Finder Script</h3>
+                        <p>
+                            Software de postprocesado de datos de simulaciones con machine learning
+                            para investigación científica. Publicado como paquete en PyPI.
+                        </p>
+                        <ul class="tags">
+                            <li class="tag">Python</li>
+                            <li class="tag">Machine Learning</li>
+                            <li class="tag">PyPI</li>
+                        </ul>
+                        <a class="card-link" href="https://pypi.org/project/vacancycalculator/" target="_blank" rel="noopener noreferrer">
+                            Ver paquete<span class="sr-only">: Vacancy Finder Script en PyPI</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="investigacion">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-atom"/></svg></span>
+                        <h3>Neutron Damage Analysis Dashboard</h3>
+                        <p>Dashboard de análisis de daño por neutrones en materiales.</p>
+                        <a class="card-link" href="https://astonishing-marigold-55e3c9.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Neutron Damage Analysis Dashboard</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="investigacion">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-radiation"/></svg></span>
+                        <h3>Primary Radiation Damage</h3>
+                        <p>Análisis de daño primario por radiación en materiales nucleares.</p>
+                        <a class="card-link" href="https://primary-radiation-damage.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Primary Radiation Damage</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="investigacion">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-cpu"/></svg></span>
+                        <h3>Memristors Summary</h3>
+                        <p>Resumen y síntesis de investigación sobre memristores.</p>
+                        <a class="card-link" href="https://memristors-summary.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Memristors Summary</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="investigacion">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg></span>
+                        <h3>Results 2026</h3>
+                        <p>Panel de resultados y visualización de datos experimentales.</p>
+                        <a class="card-link" href="https://results-2026.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Results 2026</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <!-- Papers y documentación -->
+                    <article class="card reveal" data-cat="papers">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg></span>
+                        <h3>I Love Papers</h3>
+                        <p>Buscador y visor de artículos científicos.</p>
+                        <a class="card-link" href="https://ilovepapers.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: I Love Papers</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="papers">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-library"/></svg></span>
+                        <h3>Papers Hub</h3>
+                        <p>Repositorio web para organizar y consultar papers.</p>
+                        <a class="card-link" href="https://pappers-hub.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Papers Hub</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="papers">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
+                        <h3>LAMMPS Guide</h3>
+                        <p>Manual de referencia y guía de uso de LAMMPS para simulación de dinámica molecular.</p>
+                        <a class="card-link" href="https://lammps-guide.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: LAMMPS Guide</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="papers">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-orbit"/></svg></span>
+                        <h3>Física Cosmológica Avanzada</h3>
+                        <p>Material y apuntes de física cosmológica avanzada.</p>
+                        <a class="card-link" href="https://fisics.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Física Cosmológica Avanzada</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <!-- Comunidad -->
+                    <article class="card reveal" data-cat="comunidad">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></span>
+                        <h3>Grupo Joven INSL</h3>
+                        <p>Web para el grupo de jóvenes de la Iglesia Nuestra Señora del Líbano.</p>
+                        <a class="card-link" href="https://nsl-grupojoven.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Grupo Joven INSL</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="comunidad">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg></span>
+                        <h3>Camino Luz Vida</h3>
+                        <p>Sitio web de contenido pastoral y comunitario.</p>
+                        <a class="card-link" href="https://camino-luz-vida.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Camino Luz Vida</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="comunidad">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-church"/></svg></span>
+                        <h3>Retiro Parroquia NSDL</h3>
+                        <p>Sitio del retiro de jóvenes de la parroquia Nuestra Señora de Luján.</p>
+                        <a class="card-link" href="https://retiro-parroquia-nsdl.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Retiro Parroquia NSDL</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <!-- Otros -->
+                    <article class="card reveal" data-cat="otros">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg></span>
+                        <h3>Mis Links SBS</h3>
+                        <p>Hub personal que centraliza todos mis enlaces y proyectos publicados.</p>
+                        <a class="card-link" href="https://mislinks-sbs.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Mis Links SBS</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="otros">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-palette"/></svg></span>
+                        <h3>Rahip Estudio</h3>
+                        <p>Sitio del estudio de diseño Rahip.</p>
+                        <a class="card-link" href="https://rahip-estudio.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Rahip Estudio</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="otros">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg></span>
+                        <h3>Repositorios en GitHub</h3>
+                        <p>Más de 50 repositorios de código abierto: simulación, análisis de datos y web.</p>
+                        <a class="card-link" href="https://github.com/TiagoBe0" target="_blank" rel="noopener noreferrer">
+                            Ver GitHub<span class="sr-only">: perfil de Santiago Bergamin</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+                </div>
+
+                <p class="empty-state" data-empty hidden>// sin proyectos en esta categoría</p>
+                <p class="sr-only" role="status" aria-live="polite" data-live></p>
             </section>
 
             <!-- ===================== EXPERIENCIA ===================== -->
