@@ -268,6 +268,22 @@
             margin-top: 20px;
         }
 
+        .apps-subtitle {
+            color: var(--accent-purple);
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-top: 35px;
+        }
+
+        .apps-subtitle:first-of-type {
+            margin-top: 10px;
+        }
+
+        .apps-subtitle::before {
+            content: '▹ ';
+            color: var(--accent-green);
+        }
+
         .app-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
@@ -490,20 +506,22 @@
             <p class="about-text">
                 <span class="code-comment">// Soy una persona proactiva, organizada y responsable</span><br>
                 <span class="code-tag">const</span> personalAttributes = [<span class="code-comment">'proactividad'</span>, <span class="code-comment">'organización'</span>, <span class="code-comment">'responsabilidad'</span>];<br>
-                <span class="code-tag">const</span> skills = [<span class="code-comment">'software developer'</span><span class="code-comment">'Unreal Engine 5'</span>, <span class="code-comment">'C++'</span>, <span class="code-comment">'Tecnologías Full Stack'</span>];
+                <span class="code-tag">const</span> skills = [<span class="code-comment">'software developer'</span>, <span class="code-comment">'Unreal Engine 5'</span>, <span class="code-comment">'C++'</span>, <span class="code-comment">'Tecnologías Full Stack'</span>];
             </p>
         </section>
 
         <section class="section apps-section">
             <h3>🚀 Mis Aplicaciones</h3>
+
+            <h4 class="apps-subtitle">Investigación y Simulación</h4>
             <div class="apps-grid">
 
                 <div class="app-card">
                     <div class="app-icon">🌐</div>
                     <div class="app-title">Laboratorio de Dinámica Molecular Universidad de Mendoza</div>
                     <p class="app-description">
-                        Aplicación web full stack desarrollada con Spring Boot, 
-                        PostgreSQL y frontend moderno. Integración con chat deepseek code v2-16b y claude ai. Probar: admin@demo.com pass: admin123. 
+                        Aplicación web full stack desarrollada con Spring Boot,
+                        PostgreSQL y frontend moderno. Integración con chat deepseek code v2-16b y claude ai. Probar: admin@demo.com pass: admin123.
                     </p>
                     <a href="https://simaf-lab.netlify.app/" class="app-btn">Ver Aplicación</a>
                 </div>
@@ -512,11 +530,91 @@
                     <div class="app-icon">🔬</div>
                     <div class="app-title">Vacancy Finder Script</div>
                     <p class="app-description">
-                        Software de postprocesado de datos de simulaciones con 
+                        Software de postprocesado de datos de simulaciones con
                         Machine Learning para investigación científica.
                     </p>
                     <a href="https://pypi.org/project/vacancycalculator/" class="app-btn">Ver Investigación</a>
                 </div>
+
+                <div class="app-card">
+                    <div class="app-icon">⚛️</div>
+                    <div class="app-title">Neutron Damage Analysis Dashboard</div>
+                    <p class="app-description">
+                        Dashboard de análisis de daño por neutrones en materiales.
+                    </p>
+                    <a href="https://astonishing-marigold-55e3c9.netlify.app/" class="app-btn">Ver Aplicación</a>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">☢️</div>
+                    <div class="app-title">Primary Radiation Damage</div>
+                    <p class="app-description">
+                        Daño primario por radiación en materiales nucleares.
+                    </p>
+                    <a href="https://primary-radiation-damage.netlify.app/" class="app-btn">Ver Aplicación</a>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">🧠</div>
+                    <div class="app-title">Memristors Summary</div>
+                    <p class="app-description">
+                        Resumen y síntesis de investigación sobre memristores.
+                    </p>
+                    <a href="https://memristors-summary.netlify.app/" class="app-btn">Ver Aplicación</a>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">📊</div>
+                    <div class="app-title">Results 2026</div>
+                    <p class="app-description">
+                        Panel de resultados y visualización de datos experimentales.
+                    </p>
+                    <a href="https://results-2026.netlify.app/" class="app-btn">Ver Aplicación</a>
+                </div>
+            </div>
+
+            <h4 class="apps-subtitle">Papers y Documentación</h4>
+            <div class="apps-grid">
+
+                <div class="app-card">
+                    <div class="app-icon">📄</div>
+                    <div class="app-title">I Love Papers</div>
+                    <p class="app-description">
+                        Buscador y visor de artículos científicos.
+                    </p>
+                    <a href="https://ilovepapers.netlify.app/" class="app-btn">Ver Aplicación</a>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">📚</div>
+                    <div class="app-title">Papers Hub</div>
+                    <p class="app-description">
+                        Repositorio web para organizar y consultar papers.
+                    </p>
+                    <a href="https://pappers-hub.netlify.app/" class="app-btn">Ver Aplicación</a>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">📖</div>
+                    <div class="app-title">LAMMPS Guide</div>
+                    <p class="app-description">
+                        Manual de referencia y guía de uso de LAMMPS para simulación de dinámica molecular.
+                    </p>
+                    <a href="https://lammps-guide.netlify.app/" class="app-btn">Ver Aplicación</a>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">🌌</div>
+                    <div class="app-title">Física Cosmológica Avanzada</div>
+                    <p class="app-description">
+                        Material y apuntes de física cosmológica avanzada.
+                    </p>
+                    <a href="https://fisics.netlify.app/" class="app-btn">Ver Aplicación</a>
+                </div>
+            </div>
+
+            <h4 class="apps-subtitle">Comunidad</h4>
+            <div class="apps-grid">
 
                 <div class="app-card">
                     <div class="app-icon">🌐</div>
@@ -526,16 +624,49 @@
                     </p>
                     <a href="https://nsl-grupojoven.netlify.app/" class="app-btn">Ver Aplicación</a>
                 </div>
-                   <div class="app-card">
-                    <div class="app-icon">🌐</div>
+
+                <div class="app-card">
+                    <div class="app-icon">🕯️</div>
+                    <div class="app-title">Camino Luz Vida</div>
+                    <p class="app-description">
+                        Sitio web de contenido pastoral y comunitario.
+                    </p>
+                    <a href="https://camino-luz-vida.netlify.app/" class="app-btn">Ver Aplicación</a>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">⛪</div>
+                    <div class="app-title">Retiro Parroquia NSDL</div>
+                    <p class="app-description">
+                        Sitio del retiro de jóvenes de la parroquia Nuestra Señora de Luján.
+                    </p>
+                    <a href="https://retiro-parroquia-nsdl.netlify.app/" class="app-btn">Ver Aplicación</a>
+                </div>
+            </div>
+
+            <h4 class="apps-subtitle">Otros Enlaces</h4>
+            <div class="apps-grid">
+
+                <div class="app-card">
+                    <div class="app-icon">🔗</div>
+                    <div class="app-title">Mis Links SBS</div>
+                    <p class="app-description">
+                        Hub personal que centraliza todos mis enlaces y proyectos publicados.
+                    </p>
+                    <a href="https://mislinks-sbs.netlify.app/" class="app-btn">Ver Aplicación</a>
+                </div>
+
+                <div class="app-card">
+                    <div class="app-icon">🎨</div>
                     <div class="app-title">rahip-estudio</div>
                     <p class="app-description">
                         Rahip estudio de diseño.
                     </p>
                     <a href="https://rahip-estudio.netlify.app/" class="app-btn">Ver Aplicación</a>
                 </div>
+
                 <div class="app-card">
-                    <div class="app-icon">🌐</div>
+                    <div class="app-icon">💻</div>
                     <div class="app-title">Repositorio</div>
                     <p class="app-description">
                         Mas de 50 repositorios de codigo.
