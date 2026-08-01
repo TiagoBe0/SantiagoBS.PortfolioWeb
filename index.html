@@ -3,781 +3,1511 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santiago Bergamin - Licenciado en Física</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Santiago Bergamin Saua — Físico y Desarrollador Full Stack</title>
+    <meta name="description" content="Licenciado en Física y doctorando en CONICET. Investigación en dinámica molecular con machine learning y desarrollo de software full stack (C++, Python, Spring Boot, Unreal Engine 5).">
+    <meta name="author" content="Santiago Bergamin Saua">
+    <meta name="theme-color" content="#0d1117">
+
+    <meta property="og:type" content="profile">
+    <meta property="og:title" content="Santiago Bergamin Saua — Físico y Desarrollador Full Stack">
+    <meta property="og:description" content="Investigación en dinámica molecular con machine learning y desarrollo de software full stack.">
+    <meta property="og:image" content="perfil-320.jpg">
+    <meta property="og:locale" content="es_AR">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230d1117'/><text x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='%2358a6ff' text-anchor='middle'>SB</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ============================================================
+           DESIGN TOKENS
+           Tipografía: "Developer Mono" — JetBrains Mono + IBM Plex Sans
+           Color: base GitHub Primer dark, verificado a contraste WCAG AA
+           ============================================================ */
+        :root {
+            /* Superficies */
+            --bg:            #0d1117;
+            --surface:       #161b22;
+            --surface-2:     #1c222b;
+            --surface-3:     #21262d;
+            --border:        #30363d;
+            --border-strong: #495159;
+
+            /* Texto — ratios sobre --bg */
+            --text:        #f0f6fc;  /* 16.8:1 */
+            --text-2:      #c9d1d9;  /* 11.6:1 */
+            --text-3:      #9198a1;  /*  6.2:1 */
+
+            /* Acentos */
+            --accent:      #58a6ff;  /* 7.3:1 */
+            --accent-ink:  #0d1117;
+            --accent-soft: rgba(88, 166, 255, .12);
+            --purple:      #bc8cff;  /* 8.6:1 */
+            --green:       #3fb950;  /* 6.6:1 */
+            --orange:      #ff7b72;
+
+            /* Espaciado — ritmo 4/8 */
+            --space-1: 4px;   --space-2: 8px;   --space-3: 12px;
+            --space-4: 16px;  --space-5: 24px;  --space-6: 32px;
+            --space-7: 48px;  --space-8: 64px;  --space-9: 88px;
+
+            /* Escala tipográfica */
+            --fs-xs:   0.75rem;
+            --fs-sm:   0.875rem;
+            --fs-base: 1rem;
+            --fs-lg:   1.0625rem;
+            --fs-xl:   1.1875rem;
+            --fs-2xl:  clamp(1.25rem, 0.9rem + 1.2vw, 1.5rem);
+            --fs-3xl:  clamp(1.75rem, 1.2rem + 2.4vw, 2.5rem);
+
+            /* Radios */
+            --r-sm: 6px;  --r-md: 10px;  --r-lg: 14px;  --r-full: 999px;
+
+            /* Movimiento */
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+            --dur:  200ms;
+
+            /* Iconos */
+            --icon-sm: 16px;  --icon-md: 20px;  --icon-lg: 24px;
+
+            --nav-h: 56px;
         }
 
-        :root {
-            --bg-primary: #0d1117;
-            --bg-secondary: #161b22;
-            --bg-tertiary: #21262d;
-            --text-primary: #f0f6fc;
-            --text-secondary: #c9d1d9;
-            --accent-blue: #58a6ff;
-            --accent-purple: #bc8cff;
-            --accent-green: #3fb950;
-            --accent-orange: #ff7b72;
-            --border-color: #30363d;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            font-family: 'Fira Code', monospace;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background-color: var(--bg-primary);
+            font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+            font-size: var(--fs-base);
+            line-height: 1.65;
+            color: var(--text-2);
+            background: var(--bg);
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        /* Monoespaciada solo para lo estructural: títulos, etiquetas y metadatos */
+        .mono, h1, h2, h3, h4, .nav-link, .btn, .chip, .stat-value, .filter-btn {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
         }
 
-        /* Header Styles */
-        .header {
-            text-align: center;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 40px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-        }
+        a { color: var(--accent); }
 
-        .header::before {
-            content: '';
+        /* ---------- Accesibilidad base ---------- */
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: var(--r-sm);
+        }
+        :focus:not(:focus-visible) { outline: none; }
+
+        .skip-link {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            left: var(--space-4);
+            top: calc(var(--space-4) * -4);
+            z-index: 100;
+            background: var(--accent);
+            color: var(--accent-ink);
+            padding: var(--space-3) var(--space-5);
+            border-radius: var(--r-sm);
+            font-weight: 600;
+            text-decoration: none;
+            transition: top var(--dur) var(--ease);
+        }
+        .skip-link:focus { top: var(--space-4); }
+
+        .sr-only {
+            position: absolute;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
+            border: 0;
         }
 
-        .profile-img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            border: 4px solid var(--accent-blue);
-            background: var(--bg-tertiary);
+        .icon {
+            width: var(--icon-md);
+            height: var(--icon-md);
+            flex-shrink: 0;
+            stroke-width: 1.75;
+        }
+        .icon-sm { width: var(--icon-sm); height: var(--icon-sm); }
+        .icon-lg { width: var(--icon-lg); height: var(--icon-lg); }
+
+        /* ============================================================
+           NAVEGACIÓN
+           ============================================================ */
+        .topnav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            height: var(--nav-h);
+            background: rgba(13, 17, 23, .82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .topnav-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            height: 100%;
+            padding: 0 var(--space-4);
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            color: var(--accent-blue);
-            font-weight: bold;
-            position: relative;
-            overflow: hidden;
+            gap: var(--space-4);
         }
 
-        .profile-img img {
+        .nav-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: var(--fs-sm);
+            color: var(--text);
+            text-decoration: none;
+            min-height: 44px;          /* objetivo táctil mínimo */
+            padding: 0 var(--space-2);
+            margin-left: calc(var(--space-2) * -1);
+            flex-shrink: 0;
+        }
+        .nav-brand span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            list-style: none;
+            margin-left: auto;
+            overflow-x: auto;
+            scrollbar-width: none;
+            scroll-snap-type: x proximity;
+            -webkit-overflow-scrolling: touch;
+        }
+        .nav-links::-webkit-scrollbar { display: none; }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            min-height: 44px;
+            padding: 0 var(--space-3);
+            border-radius: var(--r-sm);
+            font-size: var(--fs-sm);
+            color: var(--text-3);
+            text-decoration: none;
+            white-space: nowrap;
+            scroll-snap-align: end;
+            transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+        }
+        .nav-link:hover { color: var(--text); background: var(--surface-3); }
+        .nav-link[aria-current="true"] { color: var(--accent); background: var(--accent-soft); }
+
+        .nav-print {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            min-height: 44px;
+            min-width: 44px;
+            padding: 0 var(--space-3);
+            margin-right: calc(var(--space-2) * -1);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            background: transparent;
+            color: var(--text-3);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-sm);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all var(--dur) var(--ease);
+        }
+        .nav-print:hover { color: var(--text); border-color: var(--border-strong); background: var(--surface-3); }
+        .nav-print .label { display: none; }
+
+        /* ============================================================
+           LAYOUT
+           ============================================================ */
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 var(--space-4);
+        }
+
+        .section {
+            padding-top: var(--space-8);
+            scroll-margin-top: calc(var(--nav-h) + var(--space-5));
+        }
+
+        .section-head {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-3);
+            margin-bottom: var(--space-5);
+            padding-bottom: var(--space-3);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-head h2 {
+            font-size: var(--fs-2xl);
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.02em;
+        }
+        .section-head h2::before {
+            content: '//';
+            color: var(--purple);
+            margin-right: var(--space-2);
+            font-weight: 400;
+        }
+
+        .section-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-sm);
+            color: var(--text-3);
+            margin-left: auto;
+        }
+
+        /* ============================================================
+           HERO
+           ============================================================ */
+        .hero {
+            margin-top: var(--space-6);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+        }
+
+        .terminal-bar {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            height: 34px;
+            padding: 0 var(--space-4);
+            background: var(--surface-3);
+            border-bottom: 1px solid var(--border);
+        }
+        .terminal-dot { width: 11px; height: 11px; border-radius: 50%; }
+        .terminal-dot.red    { background: #ff5f56; }
+        .terminal-dot.yellow { background: #ffbd2e; }
+        .terminal-dot.green  { background: #27c93f; }
+        .terminal-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-xs);
+            color: var(--text-3);
+            margin-left: var(--space-2);
+        }
+
+        .hero-body {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: var(--space-5) var(--space-6);
+            align-items: center;
+            padding: var(--space-6) var(--space-5);
+        }
+
+        .avatar {
+            position: relative;
+            width: 132px;
+            height: 132px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            padding: 3px;
+            background: var(--surface-3);
+        }
+        .avatar img {
             width: 100%;
             height: 100%;
+            border-radius: 50%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            display: block;
         }
-
-        .profile-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .profile-img::after {
+        .avatar::after {
             content: '</>';
             position: absolute;
-            bottom: -10px;
-            right: -10px;
-            background: var(--accent-green);
-            color: var(--bg-primary);
-            font-size: 14px;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            z-index: 2;
+            right: -6px;
+            bottom: 2px;
+            background: var(--green);
+            color: var(--accent-ink);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-xs);
+            font-weight: 700;
+            padding: 2px var(--space-2);
+            border-radius: var(--r-sm);
+            border: 2px solid var(--surface);
         }
 
-        .header h1 {
-            font-size: 2.5em;
-            color: var(--text-primary);
-            margin-bottom: 10px;
-            font-weight: 600;
+        .hero-text h1 {
+            font-size: var(--fs-3xl);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            margin-bottom: var(--space-2);
         }
 
-        .header h2 {
-            font-size: 1.3em;
-            color: var(--accent-blue);
-            font-weight: 400;
-            margin-bottom: 20px;
+        .hero-role {
+            font-size: var(--fs-lg);
+            color: var(--text-2);
+            margin-bottom: var(--space-4);
         }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-secondary);
-            font-size: 0.9em;
-            padding: 8px 12px;
-            background: var(--bg-tertiary);
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-        }
-
-        /* Section Styles */
-        .section {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .section h3 {
-            color: var(--accent-blue);
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border-color);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section h3::before {
-            content: '//';
-            color: var(--accent-purple);
-        }
-
-        .about-text {
-            font-size: 1.1em;
-            color: var(--text-secondary);
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* Experience Styles */
-        .experience-item {
-            margin-bottom: 25px;
-            padding: 20px;
-            background: var(--bg-tertiary);
-            border-radius: 6px;
-            border-left: 4px solid var(--accent-blue);
-            position: relative;
-        }
-
-        .experience-title {
-            font-size: 1.2em;
-            color: var(--text-primary);
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .experience-company {
-            color: var(--accent-blue);
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-
-        .experience-date {
-            color: var(--accent-green);
-            font-size: 0.9em;
-            margin-bottom: 10px;
-            font-style: italic;
-        }
-
-        .experience-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Skills Styles */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .skills-category h4 {
-            color: var(--accent-purple);
-            margin-bottom: 15px;
-            font-size: 1.1em;
-            font-weight: 500;
-        }
-
-        .skill-tag {
-            display: inline-block;
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            padding: 8px 16px;
-            margin: 5px;
-            border-radius: 4px;
-            font-size: 0.9em;
-            font-weight: 500;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-tag::before {
-            content: '▹';
-            margin-right: 5px;
-            color: var(--accent-green);
-        }
-
-        .skill-tag:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(88, 166, 255, 0.2);
-            border-color: var(--accent-blue);
-        }
-
-        /* Apps Section */
-        .apps-section {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-        }
-
-        .apps-section h3 {
-            color: var(--text-primary);
-            border-bottom-color: var(--border-color);
-        }
-
-        .apps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .apps-subtitle {
-            color: var(--accent-purple);
-            font-size: 1.1em;
-            font-weight: 500;
-            margin-top: 35px;
-        }
-
-        .apps-subtitle:first-of-type {
-            margin-top: 10px;
-        }
-
-        .apps-subtitle::before {
-            content: '▹ ';
-            color: var(--accent-green);
-        }
-
-        .app-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .app-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-purple));
-        }
-
-        .app-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            border-color: var(--accent-blue);
-        }
-
-        .app-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--bg-primary);
-            border-radius: 8px;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            border: 1px solid var(--border-color);
-        }
-
-        .app-title {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .app-description {
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .app-btn {
-            background: transparent;
-            color: var(--accent-blue);
-            border: 1px solid var(--accent-blue);
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: inline-block;
-            font-size: 0.9em;
-        }
-
-        .app-btn:hover {
-            background: var(--accent-blue);
-            color: var(--bg-primary);
-            text-decoration: none;
-        }
-
-        /* Education Styles */
-        .education-item {
-            margin-bottom: 20px;
-            padding: 15px;
-            background: var(--bg-tertiary);
-            border-radius: 6px;
-            border-left: 4px solid var(--accent-green);
-        }
-
-        .education-title {
-            color: var(--text-primary);
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .education-institution {
-            color: var(--accent-blue);
-            margin-bottom: 5px;
-        }
-
-        .education-duration {
-            color: var(--accent-green);
-            font-size: 0.9em;
-        }
-
-        /* Code-like decorations */
-        .code-comment {
-            color: var(--accent-green);
-            font-style: italic;
-            opacity: 0.8;
-        }
-
-        .code-tag {
-            color: var(--accent-orange);
-        }
-
-        /* Terminal effect */
-        .terminal-bar {
-            background: var(--bg-tertiary);
-            height: 30px;
-            border-radius: 8px 8px 0 0;
-            display: flex;
-            align-items: center;
-            padding: 0 15px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-
-        .terminal-dot.red { background: #ff5f56; }
-        .terminal-dot.yellow { background: #ffbd2e; }
-        .terminal-dot.green { background: #27c93f; }
-
-        .terminal-title {
-            color: var(--text-secondary);
-            font-size: 0.9em;
-            margin-left: 10px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .contact-info {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .header h1 {
-                font-size: 2em;
-            }
-
-            .apps-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section {
-                padding: 20px;
-            }
-        }
-
-        /* Animations */
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
+        .hero-role strong { color: var(--accent); font-weight: 600; }
 
         .cursor {
             display: inline-block;
-            width: 10px;
-            height: 1.2em;
-            background: var(--accent-blue);
-            margin-left: 5px;
-            animation: blink 1s infinite;
-            vertical-align: middle;
+            width: 0.55ch;
+            height: 1em;
+            background: var(--accent);
+            margin-left: 0.15em;
+            vertical-align: -0.1em;
+            animation: blink 1.1s steps(2, start) infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .hero-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
         }
 
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            min-height: 44px;
+            padding: 0 var(--space-4);
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-full);
+            color: var(--text-2);
+            font-size: var(--fs-sm);
+            text-decoration: none;
+            transition: all var(--dur) var(--ease);
+        }
+        .chip:hover {
+            color: var(--text);
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+        .chip .icon { color: var(--accent); }
+
+        .stats {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-3);
+            padding-top: var(--space-5);
+            border-top: 1px solid var(--border);
+        }
+        /* Grid con áreas: permite el orden válido <dt>→<dd> en el HTML y
+           muestra el número arriba, alineado entre columnas aunque las
+           etiquetas ocupen distinta cantidad de líneas. */
+        .stat {
+            display: grid;
+            grid-template-areas: "value" "label";
+            align-content: start;
+            text-align: center;
+        }
+        .stat-value { grid-area: value; }
+        .stat-label { grid-area: label; }
+        .stat-value {
+            display: block;
+            font-size: var(--fs-2xl);
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1.2;
+        }
+        .stat-label {
+            font-size: var(--fs-xs);
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
 
-        ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
+        /* ============================================================
+           SOBRE MÍ
+           ============================================================ */
+        .about {
+            max-width: 68ch;
+        }
+        .about .code-comment {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-sm);
+            color: var(--green);
+            margin-bottom: var(--space-3);
+        }
+        .about p + p { margin-top: var(--space-4); }
+        .about strong { color: var(--text); font-weight: 600; }
+
+        /* ============================================================
+           FILTRO DE PROYECTOS
+           ============================================================ */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-bottom: var(--space-5);
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
+        .filter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            min-height: 44px;
+            padding: 0 var(--space-4);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-full);
+            color: var(--text-3);
+            font-size: var(--fs-sm);
+            cursor: pointer;
+            transition: all var(--dur) var(--ease);
+        }
+        .filter-btn:hover {
+            color: var(--text);
+            border-color: var(--border-strong);
+        }
+        .filter-btn[aria-pressed="true"] {
+            background: var(--accent-soft);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .filter-btn .count {
+            font-size: var(--fs-xs);
+            opacity: .7;
+        }
+
+        /* ============================================================
+           TARJETAS DE PROYECTO
+           ============================================================ */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            padding: var(--space-5);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+            position: relative;
+            transition: border-color var(--dur) var(--ease),
+                        box-shadow var(--dur) var(--ease),
+                        transform var(--dur) var(--ease);
+        }
+        .card:hover,
+        .card:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+            transform: translateY(-3px);
+        }
+        .card.is-hidden { display: none; }
+
+        .card-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--r-sm);
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            color: var(--accent);
+        }
+
+        .card h3 {
+            font-size: var(--fs-base);
+            font-weight: 700;
+            line-height: 1.4;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+
+        .card p {
+            font-size: var(--fs-sm);
+            color: var(--text-3);
+            line-height: 1.6;
+        }
+
+        .card code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+            color: var(--text-2);
+            background: var(--surface-3);
             border-radius: 4px;
+            padding: 1px 5px;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-blue);
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            list-style: none;
+        }
+        .tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-xs);
+            color: var(--purple);
+            background: rgba(188, 140, 255, .1);
+            border: 1px solid rgba(188, 140, 255, .25);
+            border-radius: var(--r-sm);
+            padding: 2px var(--space-2);
+        }
+
+        /* Enlace que cubre toda la tarjeta, manteniendo un objetivo táctil visible */
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            min-height: 44px;
+            margin-top: auto;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .card-link::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--r-md);
+        }
+        .card-link .icon {
+            transition: transform var(--dur) var(--ease);
+        }
+        .card:hover .card-link .icon { transform: translate(2px, -2px); }
+        .card-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+        .empty-state {
+            padding: var(--space-7) var(--space-4);
+            text-align: center;
+            color: var(--text-3);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-sm);
+        }
+        .empty-state[hidden] { display: none; }
+
+        /* ============================================================
+           TIMELINE — EXPERIENCIA Y EDUCACIÓN
+           ============================================================ */
+        .timeline { list-style: none; }
+
+        .timeline-item {
+            position: relative;
+            padding: 0 0 var(--space-6) var(--space-6);
+            border-left: 2px solid var(--border);
+        }
+        .timeline-item:last-child { padding-bottom: 0; border-left-color: transparent; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--accent);
+        }
+        .timeline-item.is-current::before {
+            background: var(--green);
+            border-color: var(--green);
+            box-shadow: 0 0 0 4px rgba(63, 185, 80, .18);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-xs);
+            color: var(--green);
+            letter-spacing: 0.04em;
+            margin-bottom: var(--space-1);
+        }
+
+        .timeline-item h3 {
+            font-size: var(--fs-lg);
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.4;
+        }
+
+        .timeline-org {
+            font-size: var(--fs-sm);
+            color: var(--accent);
+            margin-bottom: var(--space-2);
+        }
+
+        .timeline-item p { font-size: var(--fs-sm); color: var(--text-3); }
+
+        /* ============================================================
+           HABILIDADES
+           ============================================================ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .skills-group {
+            padding: var(--space-5);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-md);
+        }
+
+        .skills-group h3 {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--fs-sm);
+            font-weight: 700;
+            color: var(--purple);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: var(--space-4);
+        }
+        .skills-group h3 .icon { color: var(--purple); }
+
+        .skills-group ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            list-style: none;
+        }
+
+        .skill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-xs);
+            color: var(--text-2);
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            border-radius: var(--r-sm);
+            padding: var(--space-1) var(--space-3);
+            transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+        }
+        .skill:hover { border-color: var(--accent); color: var(--text); }
+
+        /* ============================================================
+           CONTACTO
+           ============================================================ */
+        .contact {
+            margin: var(--space-9) 0 var(--space-8);
+            padding: var(--space-7) var(--space-5);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            text-align: center;
+            scroll-margin-top: calc(var(--nav-h) + var(--space-5));
+        }
+
+        .contact h2 {
+            font-size: var(--fs-2xl);
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: var(--space-2);
+            letter-spacing: -0.02em;
+        }
+        .contact > p {
+            color: var(--text-3);
+            max-width: 46ch;
+            margin: 0 auto var(--space-5);
+        }
+
+        .contact-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-3);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            min-height: 48px;
+            padding: 0 var(--space-5);
+            border-radius: var(--r-sm);
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all var(--dur) var(--ease);
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: var(--accent-ink);
+            font-weight: 700;
+        }
+        .btn-primary:hover { background: #79b8ff; }
+        .btn-secondary {
+            background: transparent;
+            border-color: var(--border-strong);
+            color: var(--text-2);
+        }
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-soft);
+        }
+
+        .site-footer {
+            padding: var(--space-5) 0 var(--space-7);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-xs);
+            color: var(--text-3);
+        }
+        .site-footer a { color: var(--text-3); }
+
+        /* ============================================================
+           SCROLLBAR
+           ============================================================ */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: var(--surface); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--r-full); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+
+        /* ============================================================
+           RESPONSIVE — mobile first breakpoints: 375 / 768 / 1024
+           ============================================================ */
+        @media (max-width: 767px) {
+            .hero-body {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+                padding: var(--space-5) var(--space-4);
+            }
+            .avatar { width: 108px; height: 108px; }
+            .hero-links { justify-content: center; }
+            .stats { gap: var(--space-2); }
+            .stat-value { font-size: var(--fs-xl); }
+            .section { padding-top: var(--space-7); }
+            .cards { grid-template-columns: 1fr; }
+        }
+
+        @media (min-width: 640px) {
+            .nav-print .label { display: inline; }
+        }
+
+        @media (min-width: 1024px) {
+            .container { padding: 0 var(--space-6); }
+            .hero-body { padding: var(--space-7) var(--space-7); }
+        }
+
+        /* ============================================================
+           MOVIMIENTO — revelado escalonado al hacer scroll
+           Sin JS o con "reduce motion", todo se ve sin animación.
+           ============================================================ */
+        @media (prefers-reduced-motion: no-preference) {
+            .js .reveal {
+                opacity: 0;
+                transform: translateY(14px);
+                transition: opacity 380ms var(--ease), transform 380ms var(--ease);
+                transition-delay: var(--reveal-delay, 0ms);
+            }
+            .js .reveal.is-visible { opacity: 1; transform: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .cursor { animation: none; opacity: 1; }
+        }
+
+        /* ============================================================
+           IMPRESIÓN — CV en papel / PDF
+           ============================================================ */
+        @media print {
+            @page { margin: 14mm; }
+
+            :root {
+                --bg: #fff; --surface: #fff; --surface-2: #fff; --surface-3: #fff;
+                --border: #c8ced6; --border-strong: #98a1ab;
+                --text: #000; --text-2: #1c2128; --text-3: #444c56;
+                --accent: #0b4f9e; --purple: #5a3a91; --green: #1a5c2a;
+            }
+
+            body { font-size: 10.5pt; line-height: 1.45; background: #fff; color: #000; }
+
+            .topnav, .filters, .skip-link, .hero::after,
+            .terminal-bar, .avatar::after, .cursor, .contact-actions,
+            .empty-state, .section-count { display: none !important; }
+
+            .js .reveal { opacity: 1 !important; transform: none !important; }
+            .card.is-hidden { display: flex !important; }
+
+            .container { max-width: none; padding: 0; }
+            .hero { border: none; border-radius: 0; margin: 0 0 8pt; }
+            .hero-body { padding: 0; gap: 12pt; grid-template-columns: auto 1fr; }
+            .avatar { width: 84px; height: 84px; border-width: 1px; border-color: #98a1ab; }
+            .hero-text h1 { font-size: 20pt; }
+            .hero-role { font-size: 11pt; margin-bottom: 6pt; }
+            .chip { border: none; background: none; min-height: 0; padding: 0 10pt 0 0; font-size: 9pt; }
+            .stats { border-top: 1px solid var(--border); padding-top: 8pt; }
+
+            /* Las secciones deben fluir entre páginas; solo los elementos
+               individuales evitan cortarse por la mitad. */
+            .section { padding-top: 14pt; }
+            .section-head { margin-bottom: 8pt; padding-bottom: 4pt; break-after: avoid; }
+            .section-head h2 { font-size: 13pt; }
+
+            .card, .skills-group, .contact {
+                border: 1px solid var(--border);
+                box-shadow: none !important;
+                transform: none !important;
+                break-inside: avoid;
+                padding: 8pt;
+            }
+            .cards { grid-template-columns: repeat(2, 1fr); gap: 8pt; }
+            .card-icon { display: none; }
+
+            .timeline-item { break-inside: avoid; padding-bottom: 10pt; }
+            .contact { margin: 14pt 0 0; padding: 10pt; text-align: left; }
+
+            /* En papel las URLs deben ser legibles: el ::after que en pantalla
+               hace clicable toda la tarjeta se reconvierte en la URL impresa. */
+            a[href^="http"]::after {
+                content: ' (' attr(href) ')';
+                font-size: 8pt;
+                font-family: 'JetBrains Mono', monospace;
+                color: #444c56;
+                word-break: break-all;
+            }
+            .card-link::after {
+                position: static;
+                inset: auto;
+                display: inline;
+                border-radius: 0;
+            }
+            .card-link { display: block; min-height: 0; }
+            .card-link .icon { display: none; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <div class="terminal-bar">
-                <div class="terminal-dot red"></div>
-                <div class="terminal-dot yellow"></div>
-                <div class="terminal-dot green"></div>
-                <div class="terminal-title">santiago_bergamin.js</div>
-            </div>
-            <div class="profile-img">
-                <img src="perfil.jpeg" alt="Santiago Bergamin" onerror="this.style.display='none'; this.parentNode.innerHTML='SB';">
-            </div>
-            <h1>Santiago Bergamin Saua<span class="cursor"></span></h1>
-            <h2>Licenciado en Física</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    📱 2634542090
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+    <!-- Sprite de iconos: SVG vectorial en lugar de emojis (escalable y con color heredado) -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+        <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+        <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+        <symbol id="i-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+        <symbol id="i-printer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></symbol>
+        <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+        <symbol id="i-microscope" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></symbol>
+        <symbol id="i-atom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><path d="M20.2 20.2c2.04-2.03.02-7.36-4.5-11.9-4.54-4.52-9.87-6.54-11.9-4.5-2.04 2.03-.02 7.36 4.5 11.9 4.54 4.52 9.87 6.54 11.9 4.5Z"/><path d="M15.7 15.7c4.52-4.54 6.54-9.87 4.5-11.9-2.03-2.04-7.36-.02-11.9 4.5-4.52 4.54-6.54 9.87-4.5 11.9 2.03 2.04 7.36.02 11.9-4.5Z"/></symbol>
+        <symbol id="i-radiation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12h.01"/><path d="M14 15.46a4 4 0 0 1-4 0l-2.47 4.28a9 9 0 0 0 8.94 0Z"/><path d="M16 12a4 4 0 0 0-2-3.46l2.47-4.28A9 9 0 0 1 20.95 12Z"/><path d="M8 12a4 4 0 0 1 2-3.46L7.53 4.26A9 9 0 0 0 3.05 12Z"/></symbol>
+        <symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16v-4"/><path d="M12 16V8"/><path d="M17 16v-6"/></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+        <symbol id="i-library" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m16 6 4 14"/><path d="M12 6v14"/><path d="M8 8v12"/><path d="M4 4v16"/></symbol>
+        <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></symbol>
+        <symbol id="i-orbit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.34 6.48A10 10 0 0 1 10.27 21.85"/><path d="M3.66 17.52A10 10 0 0 1 13.74 2.15"/><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/></symbol>
+        <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+        <symbol id="i-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+        <symbol id="i-church" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 9h4"/><path d="M12 7v5"/><path d="M14 22v-4a2 2 0 0 0-4 0v4"/><path d="M18 22V5.62a1 1 0 0 0-.55-.9l-4.56-2.27a2 2 0 0 0-1.78 0L6.55 4.72a1 1 0 0 0-.55.9V22"/><path d="m18 7 3.45 1.72a1 1 0 0 1 .55.9V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.62a1 1 0 0 1 .55-.9L6 7"/></symbol>
+        <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+        <symbol id="i-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.65-.75 1.65-1.69 0-.44-.18-.83-.44-1.12-.29-.29-.44-.65-.44-1.13a1.64 1.64 0 0 1 1.67-1.67h2c3.05 0 5.55-2.5 5.55-5.55C21.97 6.01 17.46 2 12 2z"/></symbol>
+        <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></symbol>
+        <symbol id="i-gamepad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11h4"/><path d="M8 9v4"/><path d="M15 12h.01"/><path d="M18 10h.01"/><path d="M17.32 5H6.68a4 4 0 0 0-3.98 3.59c0 .05-.01.1-.02.15C2.6 9.42 2 14.46 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.41-1.41A2 2 0 0 1 9.83 16h4.34a2 2 0 0 1 1.41.59L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.55-.6-6.58-.69-7.26 0-.05-.01-.1-.02-.15A4 4 0 0 0 17.32 5z"/></symbol>
+        <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 6h.01"/><path d="M6 18h.01"/></symbol>
+        <symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></symbol>
+        <symbol id="i-network" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></symbol>
+        <symbol id="i-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></symbol>
+        <symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
+        <symbol id="i-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
+        <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+    </svg>
+
+    <nav class="topnav" aria-label="Navegación principal">
+        <div class="topnav-inner">
+            <a class="nav-brand" href="#contenido">santiago<span>_bergamin</span></a>
+            <ul class="nav-links">
+                <li><a class="nav-link" href="#proyectos">Proyectos</a></li>
+                <li><a class="nav-link" href="#experiencia">Experiencia</a></li>
+                <li><a class="nav-link" href="#habilidades">Habilidades</a></li>
+                <li><a class="nav-link" href="#educacion">Educación</a></li>
+                <li><a class="nav-link" href="#contacto">Contacto</a></li>
+            </ul>
+            <button class="nav-print" type="button" data-print>
+                <svg class="icon icon-sm" aria-hidden="true"><use href="#i-printer"/></svg>
+                <span class="label">Imprimir CV</span>
+                <span class="sr-only">Imprimir o guardar este CV en PDF</span>
+            </button>
+        </div>
+    </nav>
+
+    <main id="contenido">
+        <div class="container">
+
+            <!-- ===================== HERO ===================== -->
+            <header class="hero">
+                <div class="terminal-bar" aria-hidden="true">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">santiago_bergamin.cv</span>
                 </div>
-                <div class="contact-item">
-                    ✉️ santiagobergamin@gmail.com
+
+                <div class="hero-body">
+                    <div class="avatar">
+                        <picture>
+                            <source srcset="perfil-320.webp" type="image/webp">
+                            <img src="perfil-320.jpg" width="320" height="320"
+                                 alt="Retrato de Santiago Bergamin Saua" fetchpriority="high" decoding="async">
+                        </picture>
+                    </div>
+
+                    <div class="hero-text">
+                        <h1>Santiago Bergamin Saua<span class="cursor" aria-hidden="true"></span></h1>
+                        <p class="hero-role">
+                            Lic. en Física · <strong>Doctorando CONICET</strong> · Desarrollador Full Stack
+                        </p>
+                        <div class="hero-links">
+                            <a class="chip" href="mailto:santiagobergamin@gmail.com">
+                                <svg class="icon icon-sm" aria-hidden="true"><use href="#i-mail"/></svg>
+                                santiagobergamin@gmail.com
+                            </a>
+                            <a class="chip" href="tel:+542634542090">
+                                <svg class="icon icon-sm" aria-hidden="true"><use href="#i-phone"/></svg>
+                                2634 542090
+                            </a>
+                            <a class="chip" href="https://github.com/TiagoBe0" target="_blank" rel="noopener noreferrer">
+                                <svg class="icon icon-sm" aria-hidden="true"><use href="#i-github"/></svg>
+                                GitHub
+                            </a>
+                            <span class="chip">
+                                <svg class="icon icon-sm" aria-hidden="true"><use href="#i-pin"/></svg>
+                                Godoy Cruz, Mendoza, Argentina
+                            </span>
+                        </div>
+                    </div>
+
+                    <dl class="stats">
+                        <div class="stat">
+                            <dt class="stat-label">Proyectos publicados</dt>
+                            <dd class="stat-value">16</dd>
+                        </div>
+                        <div class="stat">
+                            <dt class="stat-label">Repositorios</dt>
+                            <dd class="stat-value">50+</dd>
+                        </div>
+                        <div class="stat">
+                            <dt class="stat-label">Paquete publicado</dt>
+                            <dd class="stat-value">PyPI</dd>
+                        </div>
+                    </dl>
                 </div>
-                <div class="contact-item">
-                    📍 O'higgins 1209, Godoy Cruz, Mendoza, Argentina
+            </header>
+
+            <!-- ===================== SOBRE MÍ ===================== -->
+            <section class="section" id="sobre-mi" aria-labelledby="h-sobre-mi">
+                <div class="section-head">
+                    <h2 id="h-sobre-mi">Sobre mí</h2>
                 </div>
-            </div>
-        </header>
-
-        <section class="section">
-            <h3>Acerca de Mí</h3>
-            <p class="about-text">
-                <span class="code-comment">// Soy una persona proactiva, organizada y responsable</span><br>
-                <span class="code-tag">const</span> personalAttributes = [<span class="code-comment">'proactividad'</span>, <span class="code-comment">'organización'</span>, <span class="code-comment">'responsabilidad'</span>];<br>
-                <span class="code-tag">const</span> skills = [<span class="code-comment">'software developer'</span>, <span class="code-comment">'Unreal Engine 5'</span>, <span class="code-comment">'C++'</span>, <span class="code-comment">'Tecnologías Full Stack'</span>];
-            </p>
-        </section>
-
-        <section class="section apps-section">
-            <h3>🚀 Mis Aplicaciones</h3>
-
-            <h4 class="apps-subtitle">Investigación y Simulación</h4>
-            <div class="apps-grid">
-
-                <div class="app-card">
-                    <div class="app-icon">🌐</div>
-                    <div class="app-title">Laboratorio de Dinámica Molecular Universidad de Mendoza</div>
-                    <p class="app-description">
-                        Aplicación web full stack desarrollada con Spring Boot,
-                        PostgreSQL y frontend moderno. Integración con chat deepseek code v2-16b y claude ai. Probar: admin@demo.com pass: admin123.
+                <div class="about reveal">
+                    <span class="code-comment">// proactivo, organizado y responsable</span>
+                    <p>
+                        Investigo <strong>daño por radiación en materiales</strong> mediante simulaciones de
+                        dinámica molecular en CONICET, y construyo el software que las vuelve utilizables:
+                        herramientas de postprocesado con machine learning, dashboards de análisis y
+                        aplicaciones web completas.
                     </p>
-                    <a href="https://simaf-lab.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
-                </div>
-
-                <div class="app-card">
-                    <div class="app-icon">🔬</div>
-                    <div class="app-title">Vacancy Finder Script</div>
-                    <p class="app-description">
-                        Software de postprocesado de datos de simulaciones con
-                        Machine Learning para investigación científica.
+                    <p>
+                        Vengo de la física, pero paso la mayor parte del tiempo escribiendo código:
+                        <strong>C++</strong> para motores y simulación, <strong>Python</strong> para ciencia de
+                        datos, <strong>Java / Spring</strong> para backend. También doy clases de programación
+                        web, que es donde aprendí a explicar sistemas complejos de forma simple.
                     </p>
-                    <a href="https://pypi.org/project/vacancycalculator/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Investigación</a>
+                </div>
+            </section>
+
+            <!-- ===================== PROYECTOS ===================== -->
+            <section class="section" id="proyectos" aria-labelledby="h-proyectos">
+                <div class="section-head">
+                    <h2 id="h-proyectos">Proyectos</h2>
+                    <span class="section-count" data-visible-count>16 publicados</span>
                 </div>
 
-                <div class="app-card">
-                    <div class="app-icon">⚛️</div>
-                    <div class="app-title">Neutron Damage Analysis Dashboard</div>
-                    <p class="app-description">
-                        Dashboard de análisis de daño por neutrones en materiales.
-                    </p>
-                    <a href="https://astonishing-marigold-55e3c9.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
+                <div class="filters" role="group" aria-label="Filtrar proyectos por categoría">
+                    <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">
+                        Todos <span class="count">16</span>
+                    </button>
+                    <button class="filter-btn" type="button" data-filter="investigacion" aria-pressed="false">
+                        Investigación <span class="count">6</span>
+                    </button>
+                    <button class="filter-btn" type="button" data-filter="papers" aria-pressed="false">
+                        Papers y docs <span class="count">4</span>
+                    </button>
+                    <button class="filter-btn" type="button" data-filter="comunidad" aria-pressed="false">
+                        Comunidad <span class="count">3</span>
+                    </button>
+                    <button class="filter-btn" type="button" data-filter="otros" aria-pressed="false">
+                        Otros <span class="count">3</span>
+                    </button>
                 </div>
 
-                <div class="app-card">
-                    <div class="app-icon">☢️</div>
-                    <div class="app-title">Primary Radiation Damage</div>
-                    <p class="app-description">
-                        Daño primario por radiación en materiales nucleares.
-                    </p>
-                    <a href="https://primary-radiation-damage.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
+                <div class="cards" id="grid-proyectos">
+
+                    <!-- Investigación y simulación -->
+                    <article class="card reveal" data-cat="investigacion">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg></span>
+                        <h3>Laboratorio de Dinámica Molecular — Universidad de Mendoza</h3>
+                        <p>
+                            Aplicación web full stack con Spring Boot, PostgreSQL y frontend moderno,
+                            integrada con DeepSeek Coder V2-16B y Claude. Demo: <code>admin@demo.com</code> / <code>admin123</code>.
+                        </p>
+                        <ul class="tags">
+                            <li class="tag">Spring Boot</li>
+                            <li class="tag">PostgreSQL</li>
+                            <li class="tag">LLM</li>
+                        </ul>
+                        <a class="card-link" href="https://simaf-lab.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Laboratorio de Dinámica Molecular</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="investigacion">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-microscope"/></svg></span>
+                        <h3>Vacancy Finder Script</h3>
+                        <p>
+                            Software de postprocesado de datos de simulaciones con machine learning
+                            para investigación científica. Publicado como paquete en PyPI.
+                        </p>
+                        <ul class="tags">
+                            <li class="tag">Python</li>
+                            <li class="tag">Machine Learning</li>
+                            <li class="tag">PyPI</li>
+                        </ul>
+                        <a class="card-link" href="https://pypi.org/project/vacancycalculator/" target="_blank" rel="noopener noreferrer">
+                            Ver paquete<span class="sr-only">: Vacancy Finder Script en PyPI</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="investigacion">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-atom"/></svg></span>
+                        <h3>Neutron Damage Analysis Dashboard</h3>
+                        <p>Dashboard de análisis de daño por neutrones en materiales.</p>
+                        <a class="card-link" href="https://astonishing-marigold-55e3c9.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Neutron Damage Analysis Dashboard</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="investigacion">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-radiation"/></svg></span>
+                        <h3>Primary Radiation Damage</h3>
+                        <p>Análisis de daño primario por radiación en materiales nucleares.</p>
+                        <a class="card-link" href="https://primary-radiation-damage.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Primary Radiation Damage</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="investigacion">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-cpu"/></svg></span>
+                        <h3>Memristors Summary</h3>
+                        <p>Resumen y síntesis de investigación sobre memristores.</p>
+                        <a class="card-link" href="https://memristors-summary.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Memristors Summary</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="investigacion">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-chart"/></svg></span>
+                        <h3>Results 2026</h3>
+                        <p>Panel de resultados y visualización de datos experimentales.</p>
+                        <a class="card-link" href="https://results-2026.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Results 2026</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <!-- Papers y documentación -->
+                    <article class="card reveal" data-cat="papers">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg></span>
+                        <h3>I Love Papers</h3>
+                        <p>Buscador y visor de artículos científicos.</p>
+                        <a class="card-link" href="https://ilovepapers.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: I Love Papers</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="papers">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-library"/></svg></span>
+                        <h3>Papers Hub</h3>
+                        <p>Repositorio web para organizar y consultar papers.</p>
+                        <a class="card-link" href="https://pappers-hub.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Papers Hub</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="papers">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
+                        <h3>LAMMPS Guide</h3>
+                        <p>Manual de referencia y guía de uso de LAMMPS para simulación de dinámica molecular.</p>
+                        <a class="card-link" href="https://lammps-guide.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: LAMMPS Guide</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="papers">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-orbit"/></svg></span>
+                        <h3>Física Cosmológica Avanzada</h3>
+                        <p>Material y apuntes de física cosmológica avanzada.</p>
+                        <a class="card-link" href="https://fisics.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Física Cosmológica Avanzada</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <!-- Comunidad -->
+                    <article class="card reveal" data-cat="comunidad">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-users"/></svg></span>
+                        <h3>Grupo Joven INSL</h3>
+                        <p>Web para el grupo de jóvenes de la Iglesia Nuestra Señora del Líbano.</p>
+                        <a class="card-link" href="https://nsl-grupojoven.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Grupo Joven INSL</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="comunidad">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-flame"/></svg></span>
+                        <h3>Camino Luz Vida</h3>
+                        <p>Sitio web de contenido pastoral y comunitario.</p>
+                        <a class="card-link" href="https://camino-luz-vida.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Camino Luz Vida</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="comunidad">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-church"/></svg></span>
+                        <h3>Retiro Parroquia NSDL</h3>
+                        <p>Sitio del retiro de jóvenes de la parroquia Nuestra Señora de Luján.</p>
+                        <a class="card-link" href="https://retiro-parroquia-nsdl.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Retiro Parroquia NSDL</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <!-- Otros -->
+                    <article class="card reveal" data-cat="otros">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-link"/></svg></span>
+                        <h3>Mis Links SBS</h3>
+                        <p>Hub personal que centraliza todos mis enlaces y proyectos publicados.</p>
+                        <a class="card-link" href="https://mislinks-sbs.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Mis Links SBS</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="otros">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-palette"/></svg></span>
+                        <h3>Rahip Estudio</h3>
+                        <p>Sitio del estudio de diseño Rahip.</p>
+                        <a class="card-link" href="https://rahip-estudio.netlify.app/" target="_blank" rel="noopener noreferrer">
+                            Ver aplicación<span class="sr-only">: Rahip Estudio</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card reveal" data-cat="otros">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg></span>
+                        <h3>Repositorios en GitHub</h3>
+                        <p>Más de 50 repositorios de código abierto: simulación, análisis de datos y web.</p>
+                        <a class="card-link" href="https://github.com/TiagoBe0" target="_blank" rel="noopener noreferrer">
+                            Ver GitHub<span class="sr-only">: perfil de Santiago Bergamin</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
                 </div>
 
-                <div class="app-card">
-                    <div class="app-icon">🧠</div>
-                    <div class="app-title">Memristors Summary</div>
-                    <p class="app-description">
-                        Resumen y síntesis de investigación sobre memristores.
-                    </p>
-                    <a href="https://memristors-summary.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
-                </div>
+                <p class="empty-state" data-empty hidden>// sin proyectos en esta categoría</p>
+                <p class="sr-only" role="status" aria-live="polite" data-live></p>
+            </section>
 
-                <div class="app-card">
-                    <div class="app-icon">📊</div>
-                    <div class="app-title">Results 2026</div>
-                    <p class="app-description">
-                        Panel de resultados y visualización de datos experimentales.
-                    </p>
-                    <a href="https://results-2026.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
+            <!-- ===================== EXPERIENCIA ===================== -->
+            <section class="section" id="experiencia" aria-labelledby="h-experiencia">
+                <div class="section-head">
+                    <h2 id="h-experiencia">Experiencia</h2>
                 </div>
-            </div>
+                <ol class="timeline">
+                    <li class="timeline-item is-current reveal">
+                        <span class="timeline-date">Actualidad</span>
+                        <h3>Doctorando en Física</h3>
+                        <p class="timeline-org">CONICET · Universidad de Mendoza / Universidad Nacional de San Luis</p>
+                        <p>
+                            Investigación y desarrollo de software de postprocesado de datos de simulaciones
+                            de dinámica molecular, implementando machine learning.
+                        </p>
+                    </li>
+                    <li class="timeline-item reveal">
+                        <span class="timeline-date">Abril 2023 — 2025</span>
+                        <h3>Profesor de Programación Web Full Stack</h3>
+                        <p class="timeline-org">Instituto CELSIUS</p>
+                        <p>
+                            A cargo de cursos de programación web para principiantes y avanzados: desde
+                            fundamentos con pseudocódigo hasta aplicaciones web completas con HTML, CSS y Spring Web.
+                        </p>
+                    </li>
+                    <li class="timeline-item reveal">
+                        <span class="timeline-date">Agosto 2022 — Diciembre 2022</span>
+                        <h3>Desarrollador C++</h3>
+                        <p class="timeline-org">Cripto Country</p>
+                        <p>
+                            Desarrollo backend en Unreal Engine 5 con C++: player controllers, mecánicas de
+                            juegos shooter, sistemas con MassAI Crowd y MassAI Traffic, y sistema de inventario.
+                        </p>
+                    </li>
+                </ol>
+            </section>
 
-            <h4 class="apps-subtitle">Papers y Documentación</h4>
-            <div class="apps-grid">
-
-                <div class="app-card">
-                    <div class="app-icon">📄</div>
-                    <div class="app-title">I Love Papers</div>
-                    <p class="app-description">
-                        Buscador y visor de artículos científicos.
-                    </p>
-                    <a href="https://ilovepapers.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
+            <!-- ===================== HABILIDADES ===================== -->
+            <section class="section" id="habilidades" aria-labelledby="h-habilidades">
+                <div class="section-head">
+                    <h2 id="h-habilidades">Habilidades técnicas</h2>
                 </div>
-
-                <div class="app-card">
-                    <div class="app-icon">📚</div>
-                    <div class="app-title">Papers Hub</div>
-                    <p class="app-description">
-                        Repositorio web para organizar y consultar papers.
-                    </p>
-                    <a href="https://pappers-hub.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
+                <div class="skills-grid">
+                    <div class="skills-group reveal">
+                        <h3><svg class="icon icon-sm" aria-hidden="true"><use href="#i-network"/></svg> Ciencia y simulación</h3>
+                        <ul>
+                            <li class="skill">Dinámica Molecular</li>
+                            <li class="skill">LAMMPS</li>
+                            <li class="skill">TensorFlow</li>
+                            <li class="skill">Machine Learning</li>
+                            <li class="skill">Python</li>
+                            <li class="skill">Clementina-XXI</li>
+                        </ul>
+                    </div>
+                    <div class="skills-group reveal">
+                        <h3><svg class="icon icon-sm" aria-hidden="true"><use href="#i-server"/></svg> Backend e infraestructura</h3>
+                        <ul>
+                            <li class="skill">Spring Boot</li>
+                            <li class="skill">Java</li>
+                            <li class="skill">Maven</li>
+                            <li class="skill">PostgreSQL</li>
+                            <li class="skill">Linux / AlmaLinux</li>
+                            <li class="skill">PyPI</li>
+                        </ul>
+                    </div>
+                    <div class="skills-group reveal">
+                        <h3><svg class="icon icon-sm" aria-hidden="true"><use href="#i-gamepad"/></svg> Motores y C++</h3>
+                        <ul>
+                            <li class="skill">Unreal Engine 5</li>
+                            <li class="skill">C++</li>
+                            <li class="skill">Blueprints</li>
+                            <li class="skill">MassAI</li>
+                            <li class="skill">Multiplayer</li>
+                            <li class="skill">Arduino</li>
+                        </ul>
+                    </div>
+                    <div class="skills-group reveal">
+                        <h3><svg class="icon icon-sm" aria-hidden="true"><use href="#i-monitor"/></svg> Frontend y web</h3>
+                        <ul>
+                            <li class="skill">HTML5</li>
+                            <li class="skill">CSS3</li>
+                            <li class="skill">JavaScript</li>
+                            <li class="skill">Full Stack</li>
+                        </ul>
+                    </div>
                 </div>
+            </section>
 
-                <div class="app-card">
-                    <div class="app-icon">📖</div>
-                    <div class="app-title">LAMMPS Guide</div>
-                    <p class="app-description">
-                        Manual de referencia y guía de uso de LAMMPS para simulación de dinámica molecular.
-                    </p>
-                    <a href="https://lammps-guide.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
+            <!-- ===================== EDUCACIÓN ===================== -->
+            <section class="section" id="educacion" aria-labelledby="h-educacion">
+                <div class="section-head">
+                    <h2 id="h-educacion">Educación y certificaciones</h2>
                 </div>
+                <ol class="timeline">
+                    <li class="timeline-item reveal">
+                        <span class="timeline-date">Título de grado</span>
+                        <h3>Licenciatura en Ciencias Básicas con orientación en Física</h3>
+                        <p class="timeline-org">Universidad Nacional de Cuyo — Facultad de Ciencias Exactas y Naturales</p>
+                    </li>
+                    <li class="timeline-item reveal">
+                        <span class="timeline-date">65 horas</span>
+                        <h3>Unreal Engine 5 C++ Multiplayer Shooter</h3>
+                        <p class="timeline-org">Udemy</p>
+                    </li>
+                    <li class="timeline-item reveal">
+                        <span class="timeline-date">30 horas</span>
+                        <h3>Unreal Engine desde 0: Crea 3 Juegos con Blueprints y C++</h3>
+                        <p class="timeline-org">Udemy</p>
+                    </li>
+                    <li class="timeline-item reveal">
+                        <span class="timeline-date">22 horas</span>
+                        <h3>AI System in Unreal Engine 5 and C++, Beginner to Advanced</h3>
+                        <p class="timeline-org">Udemy</p>
+                    </li>
+                </ol>
+            </section>
 
-                <div class="app-card">
-                    <div class="app-icon">🌌</div>
-                    <div class="app-title">Física Cosmológica Avanzada</div>
-                    <p class="app-description">
-                        Material y apuntes de física cosmológica avanzada.
-                    </p>
-                    <a href="https://fisics.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
+            <!-- ===================== CONTACTO ===================== -->
+            <section class="contact reveal" id="contacto" aria-labelledby="h-contacto">
+                <h2 id="h-contacto">Trabajemos juntos</h2>
+                <p>
+                    Busco proyectos donde la física y el software se crucen: simulación, análisis
+                    de datos o herramientas científicas. Escribime.
+                </p>
+                <div class="contact-actions">
+                    <a class="btn btn-primary" href="mailto:santiagobergamin@gmail.com">
+                        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-mail"/></svg>
+                        santiagobergamin@gmail.com
+                    </a>
+                    <a class="btn btn-secondary" href="tel:+542634542090">
+                        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-phone"/></svg>
+                        2634 542090
+                    </a>
+                    <a class="btn btn-secondary" href="https://github.com/TiagoBe0" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon icon-sm" aria-hidden="true"><use href="#i-github"/></svg>
+                        GitHub
+                    </a>
                 </div>
-            </div>
+            </section>
 
-            <h4 class="apps-subtitle">Comunidad</h4>
-            <div class="apps-grid">
+            <footer class="site-footer">
+                <p>Godoy Cruz, Mendoza, Argentina · Hecho a mano con HTML y CSS</p>
+            </footer>
+        </div>
+    </main>
 
-                <div class="app-card">
-                    <div class="app-icon">🌐</div>
-                    <div class="app-title">Grupo Joven INSL</div>
-                    <p class="app-description">
-                        Web para mi grupo de jovenes de la Iglesia Nuestra Señora del Líbano.
-                    </p>
-                    <a href="https://nsl-grupojoven.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
-                </div>
+    <script>
+        (function () {
+            'use strict';
+            document.documentElement.classList.add('js');
 
-                <div class="app-card">
-                    <div class="app-icon">🕯️</div>
-                    <div class="app-title">Camino Luz Vida</div>
-                    <p class="app-description">
-                        Sitio web de contenido pastoral y comunitario.
-                    </p>
-                    <a href="https://camino-luz-vida.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
-                </div>
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-                <div class="app-card">
-                    <div class="app-icon">⛪</div>
-                    <div class="app-title">Retiro Parroquia NSDL</div>
-                    <p class="app-description">
-                        Sitio del retiro de jóvenes de la parroquia Nuestra Señora de Luján.
-                    </p>
-                    <a href="https://retiro-parroquia-nsdl.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
-                </div>
-            </div>
+            /* ---------- Imprimir ---------- */
+            var printBtn = document.querySelector('[data-print]');
+            if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
 
-            <h4 class="apps-subtitle">Otros Enlaces</h4>
-            <div class="apps-grid">
+            /* ---------- Filtro de proyectos ---------- */
+            var grid = document.getElementById('grid-proyectos');
+            var filterBtns = Array.prototype.slice.call(document.querySelectorAll('[data-filter]'));
+            var cards = grid ? Array.prototype.slice.call(grid.querySelectorAll('.card')) : [];
+            var empty = document.querySelector('[data-empty]');
+            var live = document.querySelector('[data-live]');
+            var counter = document.querySelector('[data-visible-count]');
 
-                <div class="app-card">
-                    <div class="app-icon">🔗</div>
-                    <div class="app-title">Mis Links SBS</div>
-                    <p class="app-description">
-                        Hub personal que centraliza todos mis enlaces y proyectos publicados.
-                    </p>
-                    <a href="https://mislinks-sbs.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
-                </div>
+            function applyFilter(cat) {
+                var shown = 0;
+                cards.forEach(function (card) {
+                    var match = cat === 'all' || card.getAttribute('data-cat') === cat;
+                    card.classList.toggle('is-hidden', !match);
+                    if (match) {
+                        shown++;
+                        // Re-escalonar el revelado de las tarjetas visibles
+                        card.style.setProperty('--reveal-delay', Math.min(shown - 1, 8) * 45 + 'ms');
+                    }
+                });
+                filterBtns.forEach(function (b) {
+                    b.setAttribute('aria-pressed', String(b.getAttribute('data-filter') === cat));
+                });
+                if (empty) empty.hidden = shown > 0;
+                if (counter) counter.textContent = shown + (shown === 1 ? ' proyecto' : ' proyectos');
+                if (live) live.textContent = 'Mostrando ' + shown + ' de ' + cards.length + ' proyectos.';
+            }
 
-                <div class="app-card">
-                    <div class="app-icon">🎨</div>
-                    <div class="app-title">rahip-estudio</div>
-                    <p class="app-description">
-                        Rahip estudio de diseño.
-                    </p>
-                    <a href="https://rahip-estudio.netlify.app/" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
-                </div>
+            filterBtns.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    applyFilter(btn.getAttribute('data-filter'));
+                });
+            });
 
-                <div class="app-card">
-                    <div class="app-icon">💻</div>
-                    <div class="app-title">Repositorio</div>
-                    <p class="app-description">
-                        Mas de 50 repositorios de codigo.
-                    </p>
-                    <a href="https://github.com/TiagoBe0" class="app-btn" target="_blank" rel="noopener noreferrer">Ver Aplicación</a>
-                </div>
-            </div>
-        </section>
+            /* ---------- Revelado escalonado al hacer scroll ---------- */
+            var revealables = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
 
-        <section class="section">
-            <h3>Experiencia Laboral</h3>
-            
-            <div class="experience-item">
-                <div class="experience-title">Profesor de Programación Web Full Stack</div>
-                <div class="experience-company">Instituto CELSIUS</div>
-                <div class="experience-date">Abril 2023 - 2025</div>
-                <div class="experience-description">
-                    Profesor a cargo de cursos de programación web para principiantes y avanzados. 
-                    Los cursos comprenden desde fundamentos con pseudocódigo hasta desarrollo de aplicaciones web completas con HTML, CSS y Spring Web.
-                </div>
-            </div>
+            if (reduceMotion || !('IntersectionObserver' in window)) {
+                revealables.forEach(function (el) { el.classList.add('is-visible'); });
+            } else {
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (!entry.isIntersecting) return;
+                        entry.target.classList.add('is-visible');
+                        io.unobserve(entry.target);
+                    });
+                }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
 
-            <div class="experience-item">
-                <div class="experience-title">Desarrollador C++</div>
-                <div class="experience-company">Cripto Country</div>
-                <div class="experience-date">Agosto 2022 - Diciembre 2022</div>
-                <div class="experience-description">
-                    Desarrollador backend en Unreal Engine 5 con C++. Implementé player controllers, 
-                    mecánicas de juegos shooter, sistemas con MassAI Crowd y MassAI Traffic, y sistema de inventario.
-                </div>
-            </div>
+                // Escalonado inicial por posición dentro de su grupo
+                var groups = {};
+                revealables.forEach(function (el) {
+                    var key = el.parentElement ? el.parentElement.className : 'x';
+                    groups[key] = (groups[key] || 0);
+                    el.style.setProperty('--reveal-delay', Math.min(groups[key], 8) * 45 + 'ms');
+                    groups[key]++;
+                    io.observe(el);
+                });
 
-            <div class="experience-item">
-                <div class="experience-title">Doctorado en Física</div>
-                <div class="experience-company">CONICET- Universidad de Mendoza / Universidad Nacional De San Luis</div>
-                <div class="experience-date">actualidad</div>
-                <div class="experience-description">
-                    Investigación en desarrollo de software de postprocesado de datos de simulaciones de Dinámica Molecular implementando Machine Learning.
-                </div>
-            </div>
-        </section>
+                // Red de seguridad: ningún contenido puede quedar invisible si el
+                // observer falla o se retrasa. Lo que aún no se reveló está fuera
+                // de pantalla, así que mostrarlo aquí no interrumpe la animación.
+                window.setTimeout(function () {
+                    revealables.forEach(function (el) { el.classList.add('is-visible'); });
+                    io.disconnect();
+                }, 4000);
+            }
 
-        <section class="section">
-            <h3>Habilidades Técnicas</h3>
-            <div class="skills-container">
-                <div class="skills-category">
-                    <h4>Desarrollo de Juegos</h4>
-                    <span class="skill-tag">Unreal Engine 5</span>
-                    <span class="skill-tag">C++</span>
-                    <span class="skill-tag">Blueprints</span>
-                    <span class="skill-tag">MassAI</span>
-                    <span class="skill-tag">Multiplayer</span>
-                </div>
-                
-                <div class="skills-category">
-                    <h4>Backend & Frameworks</h4>
-                    <span class="skill-tag">Spring Boot</span>
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Maven</span>
-                    <span class="skill-tag">PostgreSQL</span>
-                </div>
-                
-                <div class="skills-category">
-                    <h4>Frontend & Web</h4>
-                    <span class="skill-tag">HTML5</span>
-                    <span class="skill-tag">CSS3</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">Full Stack</span>
-                </div>
-                
-                <div class="skills-category">
-                    <h4>Machine Learning & Ciencias</h4>
-                    <span class="skill-tag">TensorFlow</span>
-                    <span class="skill-tag">PyPI</span>
-                    <span class="skill-tag">Dinámica Molecular</span>
-                    <span class="skill-tag">Física</span>
-                    <span class="skill-tag">Arduino</span>
-                    <span class="skill-tag">LAMMPS</span>
-                    <span class="skill-tag">Linux/Linux-server/AlmaLinux</span>
-                    <span class="skill-tag">simulaciones en Clementina-XXI</span>
-                </div>
-            </div>
-        </section>
+            /* ---------- Scrollspy en la navegación ---------- */
+            var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
+            var sections = navLinks
+                .map(function (l) { return document.querySelector(l.getAttribute('href')); })
+                .filter(Boolean);
 
-        <section class="section">
-            <h3>Educación & Certificaciones</h3>
-            
-            <div class="education-item">
-                <div class="education-title">Licenciatura en Ciencias Básicas con orientación en Física</div>
-                <div class="education-institution">Universidad Nacional de Cuyo - Facultad de Ciencias Exactas y Naturales</div>
-            </div>
-            
-            <div class="education-item">
-                <div class="education-title">AI System in Unreal Engine 5 and C++, Beginner to Advance</div>
-                <div class="education-institution">UDEMY</div>
-                <div class="education-duration">22 horas</div>
-            </div>
-            
-            <div class="education-item">
-                <div class="education-title">Unreal Engine desde 0: Crea 3 Juegos con Blueprints y C++</div>
-                <div class="education-institution">UDEMY</div>
-                <div class="education-duration">30 horas</div>
-            </div>
-            
-            <div class="education-item">
-                <div class="education-title">Unreal Engine 5 C++ Multiplayer Shooter</div>
-                <div class="education-institution">UDEMY</div>
-                <div class="education-duration">65 horas</div>
-            </div>
-        </section>
-    </div>
+            if ('IntersectionObserver' in window && sections.length) {
+                var spy = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (!entry.isIntersecting) return;
+                        navLinks.forEach(function (l) {
+                            l.setAttribute('aria-current',
+                                String(l.getAttribute('href') === '#' + entry.target.id));
+                        });
+                    });
+                }, { rootMargin: '-20% 0px -70% 0px' });
+                sections.forEach(function (s) { spy.observe(s); });
+            }
+        })();
+    </script>
 </body>
 </html>
