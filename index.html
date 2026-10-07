@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Santiago Bergamin Saua — Físico y Desarrollador Full Stack</title>
-    <meta name="description" content="Licenciado en Física y doctorando en CONICET. Investigación en dinámica molecular con machine learning y desarrollo de software full stack (C++, Python, Spring Boot, Unreal Engine 5).">
+    <title>Santiago Bergamin Saua — Ciberseguridad y Data Science</title>
+    <meta name="description" content="Ciberseguridad y Data Science. Físico y doctorando CONICET: análisis de datos con Python y machine learning, desarrollo seguro full stack (Java/Spring, C++) y proyectos propios en malbecmotion.com y mendozaendatos.com.">
     <meta name="author" content="Santiago Bergamin Saua">
-    <meta name="theme-color" content="#0d1117">
+    <meta name="theme-color" content="#f6f8fa">
+    <meta name="color-scheme" content="light">
 
     <meta property="og:type" content="profile">
-    <meta property="og:title" content="Santiago Bergamin Saua — Físico y Desarrollador Full Stack">
-    <meta property="og:description" content="Investigación en dinámica molecular con machine learning y desarrollo de software full stack.">
+    <meta property="og:title" content="Santiago Bergamin Saua — Ciberseguridad y Data Science">
+    <meta property="og:description" content="Análisis de datos, machine learning y desarrollo seguro. Proyectos en malbecmotion.com y mendozaendatos.com.">
     <meta property="og:image" content="perfil-320.jpg">
     <meta property="og:locale" content="es_AR">
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230d1117'/><text x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='%2358a6ff' text-anchor='middle'>SB</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230969da'/><text x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='%23ffffff' text-anchor='middle'>SB</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,29 +25,35 @@
         /* ============================================================
            DESIGN TOKENS
            Tipografía: "Developer Mono" — JetBrains Mono + IBM Plex Sans
-           Color: base GitHub Primer dark, verificado a contraste WCAG AA
+           Color: base GitHub Primer light (tema claro), contraste WCAG AA
            ============================================================ */
         :root {
+            color-scheme: light;
+
             /* Superficies */
-            --bg:            #0d1117;
-            --surface:       #161b22;
-            --surface-2:     #1c222b;
-            --surface-3:     #21262d;
-            --border:        #30363d;
-            --border-strong: #495159;
+            --bg:            #f6f8fa;
+            --surface:       #ffffff;
+            --surface-2:     #f6f8fa;
+            --surface-3:     #eff2f5;
+            --border:        #d0d7de;
+            --border-strong: #afb8c1;
 
             /* Texto — ratios sobre --bg */
-            --text:        #f0f6fc;  /* 16.8:1 */
-            --text-2:      #c9d1d9;  /* 11.6:1 */
-            --text-3:      #9198a1;  /*  6.2:1 */
+            --text:        #1f2328;
+            --text-2:      #3d444d;
+            --text-3:      #59636e;
 
             /* Acentos */
-            --accent:      #58a6ff;  /* 7.3:1 */
-            --accent-ink:  #0d1117;
-            --accent-soft: rgba(88, 166, 255, .12);
-            --purple:      #bc8cff;  /* 8.6:1 */
-            --green:       #3fb950;  /* 6.6:1 */
-            --orange:      #ff7b72;
+            --accent:      #0969da;
+            --accent-hover:#0550ae;
+            --accent-ink:  #ffffff;
+            --accent-soft: rgba(9, 105, 218, .08);
+            --purple:      #8250df;
+            --purple-soft: rgba(130, 80, 223, .08);
+            --purple-line: rgba(130, 80, 223, .28);
+            --green:       #1a7f37;
+            --orange:      #cf222e;
+            --shadow:      0 8px 24px rgba(31, 35, 40, .12);
 
             /* Espaciado — ritmo 4/8 */
             --space-1: 4px;   --space-2: 8px;   --space-3: 12px;
@@ -150,7 +157,7 @@
             top: 0;
             z-index: 50;
             height: var(--nav-h);
-            background: rgba(13, 17, 23, .82);
+            background: rgba(255, 255, 255, .85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
@@ -411,7 +418,7 @@
         .stats {
             grid-column: 1 / -1;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: var(--space-3);
             padding-top: var(--space-5);
             border-top: 1px solid var(--border);
@@ -520,7 +527,7 @@
         .card:hover,
         .card:focus-within {
             border-color: var(--accent);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, .35);
+            box-shadow: var(--shadow);
             transform: translateY(-3px);
         }
         .card.is-hidden { display: none; }
@@ -570,8 +577,8 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: var(--fs-xs);
             color: var(--purple);
-            background: rgba(188, 140, 255, .1);
-            border: 1px solid rgba(188, 140, 255, .25);
+            background: var(--purple-soft);
+            border: 1px solid var(--purple-line);
             border-radius: var(--r-sm);
             padding: 2px var(--space-2);
         }
@@ -611,6 +618,25 @@
         .empty-state[hidden] { display: none; }
 
         /* ============================================================
+           DESTACADOS — dominios propios
+           ============================================================ */
+        .featured {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--space-4);
+        }
+        .card--featured {
+            border-top: 3px solid var(--accent);
+        }
+        .card--featured:nth-child(3) { border-top-color: var(--green); }
+        .card-domain {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-xs);
+            color: var(--green);
+            word-break: break-all;
+        }
+
+        /* ============================================================
            TIMELINE — EXPERIENCIA Y EDUCACIÓN
            ============================================================ */
         .timeline { list-style: none; }
@@ -636,7 +662,7 @@
         .timeline-item.is-current::before {
             background: var(--green);
             border-color: var(--green);
-            box-shadow: 0 0 0 4px rgba(63, 185, 80, .18);
+            box-shadow: 0 0 0 4px rgba(26, 127, 55, .16);
         }
 
         .timeline-date {
@@ -764,7 +790,7 @@
             color: var(--accent-ink);
             font-weight: 700;
         }
-        .btn-primary:hover { background: #79b8ff; }
+        .btn-primary:hover { background: var(--accent-hover); }
         .btn-secondary {
             background: transparent;
             border-color: var(--border-strong);
@@ -806,7 +832,7 @@
             }
             .avatar { width: 108px; height: 108px; }
             .hero-links { justify-content: center; }
-            .stats { gap: var(--space-2); }
+            .stats { grid-template-columns: repeat(2, 1fr); gap: var(--space-4) var(--space-2); }
             .stat-value { font-size: var(--fs-xl); }
             .section { padding-top: var(--space-7); }
             .cards { grid-template-columns: 1fr; }
@@ -889,7 +915,7 @@
                 break-inside: avoid;
                 padding: 8pt;
             }
-            .cards { grid-template-columns: repeat(2, 1fr); gap: 8pt; }
+            .cards, .featured { grid-template-columns: repeat(2, 1fr); gap: 8pt; }
             .card-icon { display: none; }
 
             .timeline-item { break-inside: avoid; padding-bottom: 10pt; }
@@ -950,12 +976,16 @@
         <symbol id="i-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.83l8.57 3.91a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></symbol>
         <symbol id="i-package" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></symbol>
         <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+        <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+        <symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></symbol>
+        <symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></symbol>
     </svg>
 
     <nav class="topnav" aria-label="Navegación principal">
         <div class="topnav-inner">
             <a class="nav-brand" href="#contenido">santiago<span>_bergamin</span></a>
             <ul class="nav-links">
+                <li><a class="nav-link" href="#destacados">Destacados</a></li>
                 <li><a class="nav-link" href="#proyectos">Proyectos</a></li>
                 <li><a class="nav-link" href="#experiencia">Experiencia</a></li>
                 <li><a class="nav-link" href="#habilidades">Habilidades</a></li>
@@ -994,7 +1024,7 @@
                     <div class="hero-text">
                         <h1>Santiago Bergamin Saua<span class="cursor" aria-hidden="true"></span></h1>
                         <p class="hero-role">
-                            Lic. en Física · <strong>Doctorando CONICET</strong> · Desarrollador Full Stack
+                            <strong>Ciberseguridad</strong> · <strong>Data Science</strong> · Físico y doctorando CONICET
                         </p>
                         <div class="hero-links">
                             <a class="chip" href="mailto:santiagobergamin@gmail.com">
@@ -1009,6 +1039,14 @@
                                 <svg class="icon icon-sm" aria-hidden="true"><use href="#i-github"/></svg>
                                 GitHub
                             </a>
+                            <a class="chip" href="https://malbecmotion.com" target="_blank" rel="noopener noreferrer">
+                                <svg class="icon icon-sm" aria-hidden="true"><use href="#i-globe"/></svg>
+                                malbecmotion.com
+                            </a>
+                            <a class="chip" href="https://mendozaendatos.com" target="_blank" rel="noopener noreferrer">
+                                <svg class="icon icon-sm" aria-hidden="true"><use href="#i-globe"/></svg>
+                                mendozaendatos.com
+                            </a>
                             <span class="chip">
                                 <svg class="icon icon-sm" aria-hidden="true"><use href="#i-pin"/></svg>
                                 Godoy Cruz, Mendoza, Argentina
@@ -1019,7 +1057,11 @@
                     <dl class="stats">
                         <div class="stat">
                             <dt class="stat-label">Proyectos publicados</dt>
-                            <dd class="stat-value">16</dd>
+                            <dd class="stat-value">17</dd>
+                        </div>
+                        <div class="stat">
+                            <dt class="stat-label">Dominios propios</dt>
+                            <dd class="stat-value">2</dd>
                         </div>
                         <div class="stat">
                             <dt class="stat-label">Repositorios</dt>
@@ -1033,24 +1075,73 @@
                 </div>
             </header>
 
+            <!-- ===================== DESTACADOS ===================== -->
+            <section class="section" id="destacados" aria-labelledby="h-destacados">
+                <div class="section-head">
+                    <h2 id="h-destacados">Destacados</h2>
+                    <span class="section-count">dominios propios</span>
+                </div>
+                <div class="featured">
+                    <article class="card card--featured reveal">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg></span>
+                        <span class="card-domain">malbecmotion.com</span>
+                        <h3>Malbec Motion</h3>
+                        <p>Mi dominio principal: allí publico proyectos y herramientas web propias.</p>
+                        <a class="card-link" href="https://malbecmotion.com" target="_blank" rel="noopener noreferrer">
+                            Visitar sitio<span class="sr-only">: malbecmotion.com</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card card--featured reveal">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-database"/></svg></span>
+                        <span class="card-domain">mendozaendatos.com</span>
+                        <h3>Mendoza en Datos</h3>
+                        <p>Proyecto de datos sobre Mendoza: análisis y visualización de información.</p>
+                        <a class="card-link" href="https://mendozaendatos.com" target="_blank" rel="noopener noreferrer">
+                            Visitar sitio<span class="sr-only">: mendozaendatos.com</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+
+                    <article class="card card--featured reveal">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg></span>
+                        <span class="card-domain">malbecmotion.com/sbs/btc</span>
+                        <h3>Análisis de mercado cripto — BTC</h3>
+                        <p>Análisis de datos del mercado de Bitcoin: series de precios, visualización e interpretación de tendencias.</p>
+                        <ul class="tags">
+                            <li class="tag">Data Science</li>
+                            <li class="tag">Series temporales</li>
+                        </ul>
+                        <a class="card-link" href="https://malbecmotion.com/sbs/btc" target="_blank" rel="noopener noreferrer">
+                            Ver análisis<span class="sr-only">: mercado cripto BTC</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
+                </div>
+            </section>
+
             <!-- ===================== SOBRE MÍ ===================== -->
             <section class="section" id="sobre-mi" aria-labelledby="h-sobre-mi">
                 <div class="section-head">
                     <h2 id="h-sobre-mi">Sobre mí</h2>
                 </div>
                 <div class="about reveal">
-                    <span class="code-comment">// proactivo, organizado y responsable</span>
+                    <span class="code-comment">// datos, seguridad y método científico</span>
                     <p>
-                        Investigo <strong>daño por radiación en materiales</strong> mediante simulaciones de
-                        dinámica molecular en CONICET, y construyo el software que las vuelve utilizables:
-                        herramientas de postprocesado con machine learning, dashboards de análisis y
-                        aplicaciones web completas.
+                        Me enfoco en <strong>ciberseguridad</strong> y <strong>data science</strong>: convertir
+                        grandes volúmenes de datos en decisiones y construir sistemas que se puedan
+                        defender. Vengo de la física, donde el rigor, la estadística y la duda
+                        metódica son la forma normal de trabajar.
                     </p>
                     <p>
-                        Vengo de la física, pero paso la mayor parte del tiempo escribiendo código:
-                        <strong>C++</strong> para motores y simulación, <strong>Python</strong> para ciencia de
-                        datos, <strong>Java / Spring</strong> para backend. También doy clases de programación
-                        web, que es donde aprendí a explicar sistemas complejos de forma simple.
+                        En CONICET investigo <strong>daño por radiación en materiales</strong> con simulaciones
+                        de dinámica molecular y desarrollo herramientas de postprocesado con
+                        <strong>machine learning</strong> en <strong>Python</strong>. Fuera de la investigación
+                        publico proyectos de análisis de datos —como el análisis del mercado cripto— y
+                        desarrollo backend en <strong>Java / Spring</strong> y <strong>C++</strong> sobre
+                        <strong>Linux</strong>, con atención a autenticación, control de acceso y
+                        configuración segura del despliegue.
                     </p>
                 </div>
             </section>
@@ -1059,12 +1150,15 @@
             <section class="section" id="proyectos" aria-labelledby="h-proyectos">
                 <div class="section-head">
                     <h2 id="h-proyectos">Proyectos</h2>
-                    <span class="section-count" data-visible-count>16 publicados</span>
+                    <span class="section-count" data-visible-count>17 publicados</span>
                 </div>
 
                 <div class="filters" role="group" aria-label="Filtrar proyectos por categoría">
                     <button class="filter-btn" type="button" data-filter="all" aria-pressed="true">
-                        Todos <span class="count">16</span>
+                        Todos <span class="count">17</span>
+                    </button>
+                    <button class="filter-btn" type="button" data-filter="datos" aria-pressed="false">
+                        Data Science <span class="count">1</span>
                     </button>
                     <button class="filter-btn" type="button" data-filter="investigacion" aria-pressed="false">
                         Investigación <span class="count">6</span>
@@ -1081,6 +1175,25 @@
                 </div>
 
                 <div class="cards" id="grid-proyectos">
+
+                    <!-- Data Science -->
+                    <article class="card reveal" data-cat="datos">
+                        <span class="card-icon"><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg></span>
+                        <h3>Análisis de mercado cripto — BTC</h3>
+                        <p>
+                            Proyecto de análisis de datos del mercado de Bitcoin: series de precios,
+                            visualización e interpretación de tendencias.
+                        </p>
+                        <ul class="tags">
+                            <li class="tag">Data Science</li>
+                            <li class="tag">Series temporales</li>
+                            <li class="tag">Cripto</li>
+                        </ul>
+                        <a class="card-link" href="https://malbecmotion.com/sbs/btc" target="_blank" rel="noopener noreferrer">
+                            Ver análisis<span class="sr-only">: Análisis de mercado cripto BTC</span>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
+                        </a>
+                    </article>
 
                     <!-- Investigación y simulación -->
                     <article class="card reveal" data-cat="investigacion">
@@ -1310,14 +1423,33 @@
                 </div>
                 <div class="skills-grid">
                     <div class="skills-group reveal">
+                        <h3><svg class="icon icon-sm" aria-hidden="true"><use href="#i-shield"/></svg> Ciberseguridad</h3>
+                        <ul>
+                            <li class="skill">Linux / hardening</li>
+                            <li class="skill">OWASP Top 10</li>
+                            <li class="skill">Spring Security</li>
+                            <li class="skill">Autenticación y roles</li>
+                            <li class="skill">Cabeceras HTTP seguras</li>
+                            <li class="skill">Análisis de logs</li>
+                        </ul>
+                    </div>
+                    <div class="skills-group reveal">
+                        <h3><svg class="icon icon-sm" aria-hidden="true"><use href="#i-chart"/></svg> Data Science</h3>
+                        <ul>
+                            <li class="skill">Python</li>
+                            <li class="skill">Machine Learning</li>
+                            <li class="skill">TensorFlow</li>
+                            <li class="skill">Series temporales</li>
+                            <li class="skill">Visualización de datos</li>
+                            <li class="skill">SQL / PostgreSQL</li>
+                        </ul>
+                    </div>
+                    <div class="skills-group reveal">
                         <h3><svg class="icon icon-sm" aria-hidden="true"><use href="#i-network"/></svg> Ciencia y simulación</h3>
                         <ul>
                             <li class="skill">Dinámica Molecular</li>
                             <li class="skill">LAMMPS</li>
-                            <li class="skill">TensorFlow</li>
-                            <li class="skill">Machine Learning</li>
-                            <li class="skill">Python</li>
-                            <li class="skill">Clementina-XXI</li>
+                            <li class="skill">Clementina-XXI (HPC)</li>
                         </ul>
                     </div>
                     <div class="skills-group reveal">
@@ -1387,8 +1519,8 @@
             <section class="contact reveal" id="contacto" aria-labelledby="h-contacto">
                 <h2 id="h-contacto">Trabajemos juntos</h2>
                 <p>
-                    Busco proyectos donde la física y el software se crucen: simulación, análisis
-                    de datos o herramientas científicas. Escribime.
+                    Busco proyectos de ciberseguridad y ciencia de datos donde el rigor científico
+                    sume: análisis, modelado y sistemas seguros. Escribime.
                 </p>
                 <div class="contact-actions">
                     <a class="btn btn-primary" href="mailto:santiagobergamin@gmail.com">
@@ -1412,102 +1544,6 @@
         </div>
     </main>
 
-    <script>
-        (function () {
-            'use strict';
-            document.documentElement.classList.add('js');
-
-            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            /* ---------- Imprimir ---------- */
-            var printBtn = document.querySelector('[data-print]');
-            if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
-
-            /* ---------- Filtro de proyectos ---------- */
-            var grid = document.getElementById('grid-proyectos');
-            var filterBtns = Array.prototype.slice.call(document.querySelectorAll('[data-filter]'));
-            var cards = grid ? Array.prototype.slice.call(grid.querySelectorAll('.card')) : [];
-            var empty = document.querySelector('[data-empty]');
-            var live = document.querySelector('[data-live]');
-            var counter = document.querySelector('[data-visible-count]');
-
-            function applyFilter(cat) {
-                var shown = 0;
-                cards.forEach(function (card) {
-                    var match = cat === 'all' || card.getAttribute('data-cat') === cat;
-                    card.classList.toggle('is-hidden', !match);
-                    if (match) {
-                        shown++;
-                        // Re-escalonar el revelado de las tarjetas visibles
-                        card.style.setProperty('--reveal-delay', Math.min(shown - 1, 8) * 45 + 'ms');
-                    }
-                });
-                filterBtns.forEach(function (b) {
-                    b.setAttribute('aria-pressed', String(b.getAttribute('data-filter') === cat));
-                });
-                if (empty) empty.hidden = shown > 0;
-                if (counter) counter.textContent = shown + (shown === 1 ? ' proyecto' : ' proyectos');
-                if (live) live.textContent = 'Mostrando ' + shown + ' de ' + cards.length + ' proyectos.';
-            }
-
-            filterBtns.forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    applyFilter(btn.getAttribute('data-filter'));
-                });
-            });
-
-            /* ---------- Revelado escalonado al hacer scroll ---------- */
-            var revealables = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-
-            if (reduceMotion || !('IntersectionObserver' in window)) {
-                revealables.forEach(function (el) { el.classList.add('is-visible'); });
-            } else {
-                var io = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (entry) {
-                        if (!entry.isIntersecting) return;
-                        entry.target.classList.add('is-visible');
-                        io.unobserve(entry.target);
-                    });
-                }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-
-                // Escalonado inicial por posición dentro de su grupo
-                var groups = {};
-                revealables.forEach(function (el) {
-                    var key = el.parentElement ? el.parentElement.className : 'x';
-                    groups[key] = (groups[key] || 0);
-                    el.style.setProperty('--reveal-delay', Math.min(groups[key], 8) * 45 + 'ms');
-                    groups[key]++;
-                    io.observe(el);
-                });
-
-                // Red de seguridad: ningún contenido puede quedar invisible si el
-                // observer falla o se retrasa. Lo que aún no se reveló está fuera
-                // de pantalla, así que mostrarlo aquí no interrumpe la animación.
-                window.setTimeout(function () {
-                    revealables.forEach(function (el) { el.classList.add('is-visible'); });
-                    io.disconnect();
-                }, 4000);
-            }
-
-            /* ---------- Scrollspy en la navegación ---------- */
-            var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-link'));
-            var sections = navLinks
-                .map(function (l) { return document.querySelector(l.getAttribute('href')); })
-                .filter(Boolean);
-
-            if ('IntersectionObserver' in window && sections.length) {
-                var spy = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (entry) {
-                        if (!entry.isIntersecting) return;
-                        navLinks.forEach(function (l) {
-                            l.setAttribute('aria-current',
-                                String(l.getAttribute('href') === '#' + entry.target.id));
-                        });
-                    });
-                }, { rootMargin: '-20% 0px -70% 0px' });
-                sections.forEach(function (s) { spy.observe(s); });
-            }
-        })();
-    </script>
+    <script src="main.js" defer></script>
 </body>
 </html>
