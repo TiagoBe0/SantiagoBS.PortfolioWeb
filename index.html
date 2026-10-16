@@ -542,7 +542,30 @@
             object-fit: cover;
             object-position: top;
             background: var(--surface-3);
+        }
+        /* Dos capturas por proyecto: la segunda aparece con un fundido cruzado */
+        .feature-media {
+            position: relative;
+            display: block;
             border-bottom: 1px solid var(--border);
+        }
+        .feature-shot--alt {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+        }
+        @media (prefers-reduced-motion: no-preference) {
+            .feature-shot--alt {
+                animation: shot-swap 10s ease-in-out infinite;
+                animation-delay: var(--swap-delay, 0s);
+            }
+            .feature:hover .feature-shot--alt,
+            .feature:focus-visible .feature-shot--alt { animation-play-state: paused; }
+        }
+        @keyframes shot-swap {
+            0%, 40%  { opacity: 0; }
+            50%, 90% { opacity: 1; }
+            100%     { opacity: 0; }
         }
         .feature-body {
             display: flex;
@@ -834,7 +857,7 @@
             .hero-links { font-size: 9pt; }
             .hero-links a[href^="http"]::after { content: none; }
             .feature { break-inside: avoid; box-shadow: none !important; transform: none !important; }
-            .feature-shot { display: none; }
+            .feature-media { display: none; }
 
             /* Las secciones deben fluir entre páginas; solo los elementos
                individuales evitan cortarse por la mitad. */
@@ -965,7 +988,7 @@
                 </div>
                 <div class="featured">
                     <a class="feature reveal" href="https://mendozaendatos.com" target="_blank" rel="noopener noreferrer">
-                        <img class="feature-shot" src="img/preview-mendozaendatos.webp" width="960" height="540" loading="lazy" decoding="async" alt="Vista previa de Mendoza en Datos: tablero de compras públicas con alertas de anomalías y gráficos por año">
+                        <span class="feature-media" style="--swap-delay: 0s"><img class="feature-shot" src="img/preview-mendozaendatos.webp" width="960" height="540" loading="lazy" decoding="async" alt="Vista previa de Mendoza en Datos: tablero de compras públicas con alertas de anomalías y gráficos por año"><img class="feature-shot feature-shot--alt" src="img/preview-mendozaendatos-2.webp" width="960" height="540" loading="lazy" decoding="async" alt="Mendoza en Datos: ranking de proveedores, organismos y contrataciones más grandes"></span>
                         <span class="feature-body">
                             <span class="feature-title">Mendoza en Datos<svg class="icon icon-sm feature-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
                             <span class="feature-domain">mendozaendatos.com</span>
@@ -974,7 +997,7 @@
                         </span>
                     </a>
                     <a class="feature no-url reveal" href="https://malbecmotion.com/sbs/btc" target="_blank" rel="noopener noreferrer">
-                        <img class="feature-shot" src="img/preview-btc.webp" width="960" height="540" loading="lazy" decoding="async" alt="Vista previa del panel de análisis de Bitcoin: velas semanales, perfil de volumen, mapa de liquidez y MACD">
+                        <span class="feature-media" style="--swap-delay: -3.3s"><img class="feature-shot" src="img/preview-btc.webp" width="960" height="540" loading="lazy" decoding="async" alt="Vista previa del panel de análisis de Bitcoin: velas semanales, perfil de volumen, mapa de liquidez y MACD"><img class="feature-shot feature-shot--alt" src="img/preview-btc-2.webp" width="960" height="540" loading="lazy" decoding="async" alt="Panel de BTC: tabla diaria de precio, market cap, dominancia y emisión de stablecoins"></span>
                         <span class="feature-body">
                             <span class="feature-title">Análisis de mercado cripto — BTC<svg class="icon icon-sm feature-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
                             <span class="feature-desc">Panel de análisis técnico de Bitcoin: velas multi-temporalidad, perfil de volumen, mapa de liquidez, MACD, RSI, funding, open interest y actividad de ballenas.</span>
@@ -982,7 +1005,7 @@
                         </span>
                     </a>
                     <a class="feature no-url reveal" href="https://malbecmotion.com/sbs/openscience/" target="_blank" rel="noopener noreferrer">
-                        <img class="feature-shot" src="img/preview-openscience.webp" width="960" height="540" loading="lazy" decoding="async" alt="Vista previa de OpenScienceMD: buscador de papers de dinámica molecular con filtros por tema y fuente">
+                        <span class="feature-media"><img class="feature-shot" src="img/preview-openscience.webp" width="960" height="540" loading="lazy" decoding="async" alt="Vista previa de OpenScienceMD: buscador de papers de dinámica molecular con filtros por tema y fuente"></span>
                         <span class="feature-body">
                             <span class="feature-title">Revista OpenScienceMD<svg class="icon icon-sm feature-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
                             <span class="feature-desc">Revista y agregador de papers de dinámica molecular y física, actualizado automáticamente desde arXiv, bioRxiv, ChemRxiv, Crossref, Europe PMC, Semantic Scholar, DOAJ y OpenAlex.</span>
@@ -990,7 +1013,7 @@
                         </span>
                     </a>
                     <a class="feature reveal" href="https://malbecmotion.com" target="_blank" rel="noopener noreferrer">
-                        <img class="feature-shot" src="img/preview-malbecmotion.webp" width="960" height="540" loading="lazy" decoding="async" alt="Vista previa de Malbec Motion: portada con el título Video publicitario con IA">
+                        <span class="feature-media" style="--swap-delay: -6.6s"><img class="feature-shot" src="img/preview-malbecmotion.webp" width="960" height="540" loading="lazy" decoding="async" alt="Vista previa de Malbec Motion: portada con el título Video publicitario con IA"><img class="feature-shot feature-shot--alt" src="img/preview-malbecmotion-2.webp" width="960" height="540" loading="lazy" decoding="async" alt="Malbec Motion: agencia de video con IA hecha en Mendoza y datos de enoturismo"></span>
                         <span class="feature-body">
                             <span class="feature-title">Malbec Motion<svg class="icon icon-sm feature-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
                             <span class="feature-domain">malbecmotion.com</span>
