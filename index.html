@@ -516,38 +516,61 @@
         .empty-state[hidden] { display: none; }
 
         /* ============================================================
-           DESTACADOS — dominios propios
+           DESTACADOS — proyectos propios con vista previa
            ============================================================ */
         .featured {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: var(--space-3);
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: var(--space-4);
         }
         .feature {
             display: flex;
-            align-items: center;
-            gap: var(--space-3);
-            padding: var(--space-3) var(--space-4);
+            flex-direction: column;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--r-md);
+            overflow: hidden;
             text-decoration: none;
-            transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+            transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease),
+                        transform var(--dur) var(--ease);
         }
-        .feature:hover { border-color: var(--accent); box-shadow: var(--shadow); }
-        .feature > .icon { color: var(--accent); }
-        .feature--accent { border-color: var(--green); background: rgba(26, 127, 55, .04); }
-        .feature--accent > .icon { color: var(--green); }
-        .feature-body { display: flex; flex-direction: column; min-width: 0; }
-        .feature-domain {
+        .feature:hover,
+        .feature:focus-visible { border-color: var(--accent); box-shadow: var(--shadow); transform: translateY(-2px); }
+        .feature-shot {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            object-position: top;
+            background: var(--surface-3);
+            border-bottom: 1px solid var(--border);
+        }
+        .feature-body {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-4) var(--space-4);
+        }
+        .feature-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-2);
             font-family: 'JetBrains Mono', monospace;
-            font-size: var(--fs-sm);
+            font-size: var(--fs-base);
             font-weight: 700;
             color: var(--text);
         }
-        .feature-desc { font-size: var(--fs-xs); color: var(--text-3); line-height: 1.5; }
-        .feature-arrow { margin-left: auto; color: var(--text-3); }
-        .feature:hover .feature-arrow { color: var(--accent); }
+        .feature-domain {
+            margin-top: calc(var(--space-2) * -1);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--fs-xs);
+            color: var(--green);
+        }
+        .feature-desc { font-size: var(--fs-sm); color: var(--text-3); line-height: 1.55; }
+        .feature-arrow { flex-shrink: 0; color: var(--text-3); transition: transform var(--dur) var(--ease), color var(--dur) var(--ease); }
+        .feature:hover .feature-arrow { color: var(--accent); transform: translate(2px, -2px); }
 
         .two-col {
             display: grid;
@@ -749,6 +772,7 @@
             .stat { padding: var(--space-2) var(--space-1); }
             .stat-value { font-size: var(--fs-lg); }
             .two-col { grid-template-columns: 1fr; }
+            .featured { grid-template-columns: 1fr; }
             .cards { grid-template-columns: 1fr; }
         }
 
@@ -810,7 +834,8 @@
             .hero-role { font-size: 11pt; margin-bottom: 6pt; }
             .hero-links { font-size: 9pt; }
             .hero-links a[href^="http"]::after { content: none; }
-            .feature { break-inside: avoid; box-shadow: none !important; }
+            .feature { break-inside: avoid; box-shadow: none !important; transform: none !important; }
+            .feature-shot { display: none; }
 
             /* Las secciones deben fluir entre páginas; solo los elementos
                individuales evitan cortarse por la mitad. */
@@ -862,16 +887,12 @@
         <symbol id="i-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></symbol>
         <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
         <symbol id="i-printer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6"/><rect x="6" y="14" width="12" height="8" rx="1"/></symbol>
-        <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
         <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16v-4"/><path d="M12 16V8"/><path d="M17 16v-6"/></symbol>
         <symbol id="i-gamepad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11h4"/><path d="M8 9v4"/><path d="M15 12h.01"/><path d="M18 10h.01"/><path d="M17.32 5H6.68a4 4 0 0 0-3.98 3.59c0 .05-.01.1-.02.15C2.6 9.42 2 14.46 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.41-1.41A2 2 0 0 1 9.83 16h4.34a2 2 0 0 1 1.41.59L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.55-.6-6.58-.69-7.26 0-.05-.01-.1-.02-.15A4 4 0 0 0 17.32 5z"/></symbol>
         <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 6h.01"/><path d="M6 18h.01"/></symbol>
         <symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></symbol>
         <symbol id="i-network" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></symbol>
         <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
-        <symbol id="i-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></symbol>
-        <symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></symbol>
-        <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></symbol>
     </svg>
 
     <nav class="topnav" aria-label="Navegación principal">
@@ -941,40 +962,42 @@
             <section class="section" id="destacados" aria-labelledby="h-destacados">
                 <div class="section-head">
                     <h2 id="h-destacados">Destacados</h2>
-                    <span class="section-count">dominios y proyectos</span>
+                    <span class="section-count">en producción</span>
                 </div>
                 <div class="featured">
-                    <a class="feature reveal" href="https://malbecmotion.com" target="_blank" rel="noopener noreferrer">
-                        <svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg>
-                        <span class="feature-body">
-                            <span class="feature-domain">malbecmotion.com</span>
-                            <span class="feature-desc">Dominio principal: proyectos y herramientas web propias.</span>
-                        </span>
-                        <svg class="icon icon-sm feature-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
-                    </a>
                     <a class="feature reveal" href="https://mendozaendatos.com" target="_blank" rel="noopener noreferrer">
-                        <svg class="icon" aria-hidden="true"><use href="#i-database"/></svg>
+                        <img class="feature-shot" src="img/preview-mendozaendatos.webp" width="960" height="540" loading="lazy" decoding="async" alt="Vista previa de Mendoza en Datos: tablero de compras públicas con alertas de anomalías y gráficos por año">
                         <span class="feature-body">
+                            <span class="feature-title">Mendoza en Datos<svg class="icon icon-sm feature-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
                             <span class="feature-domain">mendozaendatos.com</span>
-                            <span class="feature-desc">Datos sobre Mendoza: análisis y visualización.</span>
+                            <span class="feature-desc">Boletín automático de la plata pública: analiza las compras del Estado de Mendoza con datos oficiales y detecta anomalías como empresas preferidas, sobrecostos y compras partidas.</span>
+                            <ul class="tags"><li class="tag">Data Science</li><li class="tag">Detección de anomalías</li><li class="tag">Datos abiertos</li></ul>
                         </span>
-                        <svg class="icon icon-sm feature-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
                     </a>
-                    <a class="feature feature--accent no-url reveal" href="https://malbecmotion.com/sbs/btc" target="_blank" rel="noopener noreferrer">
-                        <svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg>
+                    <a class="feature no-url reveal" href="https://malbecmotion.com/sbs/btc" target="_blank" rel="noopener noreferrer">
+                        <img class="feature-shot" src="img/preview-btc.webp" width="960" height="540" loading="lazy" decoding="async" alt="Vista previa del panel de análisis de Bitcoin: velas semanales, perfil de volumen, mapa de liquidez y MACD">
                         <span class="feature-body">
-                            <span class="feature-domain">Análisis de mercado cripto — BTC</span>
-                            <span class="feature-desc">Series de precios, visualización y tendencias de Bitcoin.</span>
+                            <span class="feature-title">Análisis de mercado cripto — BTC<svg class="icon icon-sm feature-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+                            <span class="feature-desc">Panel de análisis técnico de Bitcoin: velas multi-temporalidad, perfil de volumen, mapa de liquidez, MACD, RSI, funding, open interest y actividad de ballenas.</span>
+                            <ul class="tags"><li class="tag">Series temporales</li><li class="tag">Trading cuantitativo</li><li class="tag">Visualización</li></ul>
                         </span>
-                        <svg class="icon icon-sm feature-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
                     </a>
-                    <a class="feature feature--accent no-url reveal" href="https://malbecmotion.com/sbs/openscience/" target="_blank" rel="noopener noreferrer">
-                        <svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>
+                    <a class="feature no-url reveal" href="https://malbecmotion.com/sbs/openscience/" target="_blank" rel="noopener noreferrer">
+                        <img class="feature-shot" src="img/preview-openscience.webp" width="960" height="540" loading="lazy" decoding="async" alt="Vista previa de OpenScienceMD: buscador de papers de dinámica molecular con filtros por tema y fuente">
                         <span class="feature-body">
-                            <span class="feature-domain">Revista OpenScienceMD</span>
-                            <span class="feature-desc">Revista de ciencia abierta y divulgación científica.</span>
+                            <span class="feature-title">Revista OpenScienceMD<svg class="icon icon-sm feature-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+                            <span class="feature-desc">Revista y agregador de papers de dinámica molecular y física, actualizado automáticamente desde arXiv, bioRxiv, ChemRxiv, Crossref, Europe PMC, Semantic Scholar, DOAJ y OpenAlex.</span>
+                            <ul class="tags"><li class="tag">Ciencia abierta</li><li class="tag">Agregación de datos</li><li class="tag">Búsqueda</li></ul>
                         </span>
-                        <svg class="icon icon-sm feature-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+                    </a>
+                    <a class="feature reveal" href="https://malbecmotion.com" target="_blank" rel="noopener noreferrer">
+                        <img class="feature-shot" src="img/preview-malbecmotion.webp" width="960" height="540" loading="lazy" decoding="async" alt="Vista previa de Malbec Motion: portada con el título Video publicitario con IA">
+                        <span class="feature-body">
+                            <span class="feature-title">Malbec Motion<svg class="icon icon-sm feature-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
+                            <span class="feature-domain">malbecmotion.com</span>
+                            <span class="feature-desc">Estudio de video publicitario con IA para bodegas, turismo y gastronomía de Mendoza: reels, spots y campañas en tres idiomas.</span>
+                            <ul class="tags"><li class="tag">IA generativa</li><li class="tag">Producto web</li><li class="tag">Emprendimiento</li></ul>
+                        </span>
                     </a>
                 </div>
             </section>
@@ -1013,8 +1036,8 @@
                     <article class="card reveal" data-cat="datos">
                         <h3>Análisis de mercado cripto — BTC</h3>
                         <p>
-                            Proyecto de análisis de datos del mercado de Bitcoin: series de precios,
-                            visualización e interpretación de tendencias.
+                            Panel de análisis técnico de Bitcoin: perfil de volumen, mapa de liquidez,
+                            MACD, RSI, funding y open interest en varias temporalidades.
                         </p>
                         <ul class="tags">
                             <li class="tag">Data Science</li>
@@ -1101,7 +1124,7 @@
                     <!-- Papers y documentación -->
                     <article class="card reveal" data-cat="papers">
                         <h3>Revista OpenScienceMD</h3>
-                        <p>Revista de ciencia abierta y divulgación científica.</p>
+                        <p>Agregador de papers de dinámica molecular y física desde arXiv, Crossref, OpenAlex y otras fuentes abiertas.</p>
                         <a class="card-link no-url" href="https://malbecmotion.com/sbs/openscience/" target="_blank" rel="noopener noreferrer">
                             Ver revista<span class="sr-only">: Revista OpenScienceMD</span>
                             <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow"/></svg>
