@@ -12,6 +12,7 @@
     <meta property="og:type" content="profile">
     <meta property="og:title" content="Santiago Bergamin Saua — Ciberseguridad y Data Science">
     <meta property="og:description" content="Análisis de datos, machine learning y desarrollo seguro. Proyectos en malbecmotion.com y mendozaendatos.com.">
+    <meta property="og:image" content="img/perfil.jpg">
     <meta property="og:locale" content="es_AR">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230969da'/><text x='16' y='22' font-family='monospace' font-size='15' font-weight='700' fill='%23ffffff' text-anchor='middle'>SB</text></svg>">
@@ -286,7 +287,7 @@
            ============================================================ */
         .hero {
             display: grid;
-            grid-template-columns: 1fr auto;
+            grid-template-columns: auto 1fr auto;
             gap: var(--space-5);
             align-items: center;
             margin-top: var(--space-5);
@@ -295,6 +296,16 @@
             border: 1px solid var(--border);
             border-left: 3px solid var(--accent);
             border-radius: var(--r-md);
+        }
+
+        .hero-photo img {
+            display: block;
+            width: 136px;
+            height: 136px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--surface);
+            box-shadow: 0 0 0 2px var(--accent);
         }
 
         .hero h1 {
@@ -803,6 +814,7 @@
            ============================================================ */
         @media (max-width: 767px) {
             .hero { grid-template-columns: 1fr; padding: var(--space-4); }
+            .hero-photo img { width: 104px; height: 104px; }
             .stats { grid-template-columns: repeat(4, 1fr); }
             .stat { padding: var(--space-2) var(--space-1); }
             .stat-value { font-size: var(--fs-lg); }
@@ -867,6 +879,7 @@
             .container { max-width: none; padding: 0; }
             .hero { border: none; border-radius: 0; margin: 0 0 8pt; padding: 0; }
             .hero h1 { font-size: 20pt; }
+            .hero-photo img { width: 72pt; height: 72pt; box-shadow: none; border: 1px solid #98a1ab; }
             .hero-role { font-size: 11pt; margin-bottom: 6pt; }
             .hero-links { font-size: 9pt; }
             .hero-links a[href^="http"]::after { content: none; }
@@ -955,6 +968,11 @@
 
             <!-- ===================== HERO ===================== -->
             <header class="hero">
+                <picture class="hero-photo">
+                    <source srcset="img/perfil.webp" type="image/webp">
+                    <img src="img/perfil.jpg" width="480" height="480" fetchpriority="high" decoding="async"
+                         alt="Retrato de Santiago Bergamin Saua">
+                </picture>
                 <div class="hero-main">
                     <h1>Santiago Bergamin Saua</h1>
                     <p class="hero-role">
